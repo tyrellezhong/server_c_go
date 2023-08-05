@@ -1,8 +1,11 @@
 # cmake 最小版本要求
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 2.8)
 
 # 项目名称
 project(SOLDIERFIRE)
+
+#clangd 配置
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # 在CMAKE_CXX_FLAGS编译选项后追加-std=c++11等
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -Wall")

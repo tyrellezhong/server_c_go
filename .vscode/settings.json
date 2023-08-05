@@ -1,0 +1,16 @@
+{
+    "clangd.path": "/data/taylorzhong/workStudio/CFRServer/tools/dev/vscode/clangd",
+    "editor.inlayHints.enabled": "off",
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}/build",
+        "--resource-dir=/data/taylorzhong/workStudio/CFRServer/tools/dev/vscode/clang",
+        "--clang-tidy",
+        "--completion-style=detailed",
+        "--header-insertion=iwyu",
+        "--fallback-style=Google",
+        "--pch-storage=memory"
+    ],
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "cmake.configureOnOpen": false
+}
+// ./sclient -u 1721701 -c ../etc/sclient.toml

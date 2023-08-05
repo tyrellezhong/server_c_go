@@ -1,3 +1,0 @@
-/home/tyrelle/Linux/CmakeLearn/build/CMakeFiles/rebuild_cache.dir
-/home/tyrelle/Linux/CmakeLearn/build/CMakeFiles/edit_cache.dir
-/home/tyrelle/Linux/CmakeLearn/build/CMakeFiles/myexe.dir

@@ -1,4 +1,5 @@
 #include "../includes/Gun.h"
+#include "../includes/Log.h"
 #include <iostream>
 void Gun::AddBullet(int bullet_num){
     this->_bullet_count += bullet_num;
@@ -9,6 +10,6 @@ bool Gun::Shoot() {
         return false;
     }
     this->_bullet_count -= 1;
-    std::cout << "shoot sueecssfully !" << std::endl;
+    LogInfo("shoot sueecssfully !");
     return true;
 }

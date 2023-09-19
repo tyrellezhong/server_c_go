@@ -1,4 +1,5 @@
 #include "includes/Gun.h"
+#include "includes/Log.h"
 #include "includes/Soldier.h"
 
 void SoliderShoot() {
@@ -8,6 +9,7 @@ void SoliderShoot() {
     sanduo.fire();
 }
 int main() {
+    LogInfo("start run cmake learn.");
     SoliderShoot();
     return 0;
 }

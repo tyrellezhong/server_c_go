@@ -28,3 +28,7 @@ extern void ByteOrderTransform();
 extern void TCPServer();
 
 extern void TCPClient();
+
+extern void UDPServer();
+
+extern void UDPClient();

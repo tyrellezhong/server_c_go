@@ -65,7 +65,8 @@ int main() {
 
     // ByteOrderHostTest();
     // ByteOrderTransform();
-    TCPClient();
+    // TCPClient();
+   UDPClient();
     return 0;
 
 }

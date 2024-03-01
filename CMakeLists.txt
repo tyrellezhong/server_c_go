@@ -23,4 +23,4 @@ set(CMAKE_BUILD_TYPE Debug)
 include_directories(${CMAKE_SOURCE_DIR}/includes)
 
 # 编译SRC变量所代表的源代码文件，生成main可执行文件
-add_executable(myexe main.cpp src/Gun.cpp src/soldier.cpp src/Log.cpp)
+add_executable(myexe main.cpp src/Gun.cpp src/soldier.cpp src/Log.cpp src/Sockets.cpp)

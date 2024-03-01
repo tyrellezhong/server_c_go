@@ -1,8 +1,6 @@
 #include <algorithm>
 #include <cstdint>
-#include <list>
 #include <string>
-#include <unordered_set>
 #include <vector>
 #include "includes/Gun.h"
 #include "includes/Log.h"
@@ -10,6 +8,9 @@
 #include "includes/Math.h"
 #include <stdio.h>
 #include <arpa/inet.h>
+#include <stdio.h>
+#include <arpa/inet.h>
+#include "Sockets.h"
 
 
 
@@ -36,13 +37,6 @@ template <int... N> void print(index_seq<N...>) {
   (void)std::initializer_list<int>{((std::cout << N << " "), 0)...};
 }
 
-// int main() {
-//   auto r = make_index_seq<2>();
-//   print(r);
-//   return 0;
-// }
-
-
 template <size_t... N> void print(std::index_sequence<N...>) {
   std::vector<int> res;
   (void)std::initializer_list<int>{
@@ -57,39 +51,22 @@ void SoliderShoot() {
     sanduo.AddBulletToGun(20);
     sanduo.fire();
 }
-// int main() {
-//     LogInfo("start run cmake learn.");
-//     SoliderShoot();
-//     int a = 10;
-//     int b = 5;
-//     std::cout << "a > b : " << Greater(a, b) << std::endl;
-//     auto t = std::make_index_sequence<10>();
-//     print(t);
-//     std::vector<int32_t> Numbers{0,1,2,3,4,5};
-//     std::string string_test("helloworld");
-//     // static_assert(const_nums<101>(100) == 100 * 100);
-//     return 0;
-
-// }
-
 int main() {
+    LogInfo("start tcp client.");
+    // SoliderShoot();
+    // int a = 10;
+    // int b = 5;
+    // std::cout << "a > b : " << Greater(a, b) << std::endl;
+    // auto t = std::make_index_sequence<10>();
+    // print(t);
+    // std::vector<int32_t> Numbers{0,1,2,3,4,5};
+    // std::string string_test("helloworld");
+    // // static_assert(const_nums<101>(100) == 100 * 100);
 
-    // 创建一个ip字符串,点分十进制的IP地址字符串
-    char buf[] = "192.168.1.4";
-    unsigned int num = 0;
-
-    // 将点分十进制的IP字符串转换成网络字节序的整数
-    inet_pton(AF_INET, buf, &num);
-    unsigned char * p = (unsigned char *)&num;
-    printf("%d %d %d %d\n", *p, *(p+1), *(p+2), *(p+3));
-
-
-    // 将网络字节序的IP整数转换成点分十进制的IP字符串
-    char ip[16] = "";
-    const char * str =  inet_ntop(AF_INET, &num, ip, 16);
-    printf("str : %s\n", str);
-    printf("ip : %s\n", str);
-    printf("%d\n", ip == str);
-
+    // ByteOrderHostTest();
+    // ByteOrderTransform();
+    TCPClient();
     return 0;
+
 }
+

@@ -14,3 +14,115 @@
 
 [INFO] [(Time:2023-09-11 16:37:23) /data/taylorzhong/CMakeLearn/main.cpp:12 main]  start run cmake learn.
 [INFO] [(Time:2023-09-11 16:37:23) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2023-11-16 21:19:48 : === Start logging === Nov 16 2023 21:18:59
+
+[INFO] [(Time:2023-11-16 21:19:48) /data/taylorzhong/CMakeLearn/main.cpp:12 main]  start run cmake learn.
+[INFO] [(Time:2023-11-16 21:19:48) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2023-11-16 21:31:06 : === Start logging === Nov 16 2023 21:18:59
+
+[INFO] [(Time:2023-11-16 21:31:06) /data/taylorzhong/CMakeLearn/main.cpp:13 main]  start run cmake learn.
+[INFO] [(Time:2023-11-16 21:31:06) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 15:15:44 : === Start logging === Nov 16 2023 21:18:59
+
+[INFO] [(Time:2024-01-31 15:15:44) /data/taylorzhong/CMakeLearn/main.cpp:13 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 15:15:44) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 15:39:42 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 15:39:42) /data/taylorzhong/CMakeLearn/main.cpp:29 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 15:39:42) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 15:51:37 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 15:51:38) /data/taylorzhong/CMakeLearn/main.cpp:39 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 15:51:38) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 15:57:33 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 15:57:33) /data/taylorzhong/CMakeLearn/main.cpp:39 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 15:57:33) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 16:03:07 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 16:03:07) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 16:03:07) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 16:09:19 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 16:09:19) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 16:09:19) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 16:15:03 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 16:15:03) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 16:15:03) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 16:20:10 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 16:20:10) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 16:20:10) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 16:26:36 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 16:26:36) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 16:26:36) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 16:30:16 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 16:30:16) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 16:30:16) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 16:39:50 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 16:39:50) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 16:39:50) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 16:42:37 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 16:42:37) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 16:42:37) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 16:47:47 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 16:47:47) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 16:47:47) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 16:48:55 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 16:48:55) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 16:48:55) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 17:02:01 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 17:02:01) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 17:02:01) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 17:02:26 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 17:02:26) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 17:02:26) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 17:18:51 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 17:18:51) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 17:18:51) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 17:45:46 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 17:45:46) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 17:45:46) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 17:46:43 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 17:46:43) /data/taylorzhong/CMakeLearn/main.cpp:40 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 17:46:43) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 17:50:39 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-01-31 17:50:39) /data/taylorzhong/CMakeLearn/main.cpp:41 main]  start run cmake learn.
+[INFO] [(Time:2024-01-31 17:50:39) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 17:55:40 : === Start logging === Jan 31 2024 15:39:40
+
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-01-31 17:56:01 : === Start logging === Jan 31 2024 15:39:40
+
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-02-01 09:29:39 : === Start logging === Jan 31 2024 15:39:40
+
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-02-01 12:16:25 : === Start logging === Jan 31 2024 15:39:40
+
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-02-01 12:17:02 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-02-01 12:17:02) /data/taylorzhong/CMakeLearn/main.cpp:60 main]  start run cmake learn.
+[INFO] [(Time:2024-02-01 12:17:02) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-02-01 12:17:07 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-02-01 12:17:07) /data/taylorzhong/CMakeLearn/main.cpp:60 main]  start run cmake learn.
+[INFO] [(Time:2024-02-01 12:17:07) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-03-01 11:14:52 : === Start logging === Jan 31 2024 15:39:40
+
+[INFO] [(Time:2024-03-01 11:14:52) /data/taylorzhong/CMakeLearn/main.cpp:60 main]  start run cmake learn.
+[INFO] [(Time:2024-03-01 11:14:52) /data/taylorzhong/CMakeLearn/src/Gun.cpp:13 Shoot]  shoot sueecssfully !
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-03-01 11:17:33 : === Start logging === Jan 31 2024 15:39:40
+
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-03-01 11:17:55 : === Start logging === Jan 31 2024 15:39:40
+

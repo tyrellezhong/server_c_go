@@ -11,11 +11,16 @@
             "program": "${workspaceFolder}/build/myexe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/build",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
+                // {
+                //     "description": "Test",
+                //     "text": "python import sys;sys.path.insert(0, '/usr/share/gcc-8/python');from libstdcxx.v6.printers import register_libstdcxx_printers;register_libstdcxx_printers(None)",
+                //     "ignoreFailures": false
+                // },
                 {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
@@ -23,7 +28,7 @@
                 }
             ],
             "preLaunchTask": "Build",//使用tasks.json中的哪个label生成可执行文件
-            // "miDebuggerPath": "/usr/bin/gdb"
+            "miDebuggerPath": "/usr/bin/gdb"
         }
 
     ]

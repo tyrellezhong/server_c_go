@@ -11,6 +11,7 @@
         "--pch-storage=memory"
     ],
     "C_Cpp.intelliSenseEngine": "disabled",
+    // "C_Cpp.intelliSenseEngine": "default",
     "cmake.configureOnOpen": false
 }
 // ./sclient -u 1721701 -c ../etc/sclient.toml

@@ -8,7 +8,10 @@ project(SOLDIERFIRE)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # 在CMAKE_CXX_FLAGS编译选项后追加-std=c++11等
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -Wall")
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g -Wall")
+
+set(CMAKE_CXX_STANDARD 14)
+
 
 # 设定编译类型为debug，调试时需要选择debug
 set(CMAKE_BUILD_TYPE Debug)

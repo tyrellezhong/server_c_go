@@ -53,20 +53,23 @@ void SoliderShoot() {
 }
 int main() {
     LogInfo("start tcp client.");
-    // SoliderShoot();
     // int a = 10;
     // int b = 5;
     // std::cout << "a > b : " << Greater(a, b) << std::endl;
     // auto t = std::make_index_sequence<10>();
     // print(t);
+    // auto t2 = make_index_seq<5>();
+    // print(t2);
     // std::vector<int32_t> Numbers{0,1,2,3,4,5};
     // std::string string_test("helloworld");
     // // static_assert(const_nums<101>(100) == 100 * 100);
 
     // ByteOrderHostTest();
     // ByteOrderTransform();
+    // TCPServer();
+    // UDPServer();
     // TCPClient();
-   UDPClient();
+     UDPClient();
     return 0;
 
 }

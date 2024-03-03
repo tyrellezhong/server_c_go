@@ -67,8 +67,8 @@ void TCPServer()
     // 2.绑定
     struct sockaddr_in saddr;
     saddr.sin_family = AF_INET;
-    // inet_pton(AF_INET, "192.168.193.128", saddr.sin_addr.s_addr);
-    saddr.sin_addr.s_addr = INADDR_ANY;  // 0.0.0.0
+    inet_pton(AF_INET, "9.135.33.61", &saddr.sin_addr.s_addr);
+    // saddr.sin_addr.s_addr = INADDR_ANY;  // 0.0.0.0
     saddr.sin_port = htons(9999);
     int ret = bind(lfd, (struct sockaddr *)&saddr, sizeof(saddr));
 
@@ -191,7 +191,8 @@ void UDPServer()
     struct sockaddr_in addr;
     addr.sin_family = AF_INET;
     addr.sin_port = htons(9999);
-    addr.sin_addr.s_addr = INADDR_ANY;
+    inet_pton(AF_INET, "9.135.33.61", &addr.sin_addr.s_addr);
+    // addr.sin_addr.s_addr = INADDR_ANY;
 
     // 2.绑定
     int ret = bind(fd, (struct sockaddr *)&addr, sizeof(addr));
@@ -241,6 +242,17 @@ void UDPClient()
     saddr.sin_port = htons(9999);
     inet_pton(AF_INET, "9.135.33.61", &saddr.sin_addr.s_addr);
 
+    // 可以绑定，可以不绑定，绑定则自定义端口，不绑定则随机一个端口
+    struct sockaddr_in addr;
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(38419);
+    inet_pton(AF_INET, "9.135.33.61", &addr.sin_addr.s_addr);
+    int ret = bind(fd, (struct sockaddr *)&addr, sizeof(addr));
+    if(ret == -1) {
+        perror("bind");
+        exit(-1);
+    }
+
     int num = 0;
     // 3.通信
     while(1) {
@@ -251,7 +263,13 @@ void UDPClient()
         sendto(fd, sendBuf, strlen(sendBuf) + 1, 0, (struct sockaddr *)&saddr, sizeof(saddr));
 
         // 接收数据
-        int num = recvfrom(fd, sendBuf, sizeof(sendBuf), 0, NULL, NULL);
+        struct sockaddr_in serveraddr;
+        int len = sizeof(serveraddr);
+        char ipbuf[16];
+        int num = recvfrom(fd, sendBuf, sizeof(sendBuf), 0, (struct sockaddr *)&serveraddr, (socklen_t *)&len);
+        printf("server IP : %s, Port : %d\n",
+            inet_ntop(AF_INET, &serveraddr.sin_addr.s_addr, ipbuf, sizeof(ipbuf)),
+            ntohs(serveraddr.sin_port));
         printf("server say : %s\n", sendBuf);
 
         sleep(1);

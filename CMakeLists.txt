@@ -8,9 +8,9 @@ project(SOLDIERFIRE)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # 在CMAKE_CXX_FLAGS编译选项后追加-std=c++11等
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g -Wall")
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -g -Wall")
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 
 # 设定编译类型为debug，调试时需要选择debug
@@ -22,5 +22,11 @@ set(CMAKE_BUILD_TYPE Debug)
 # 向工程添加多个特定的头文件搜索路径
 include_directories(${CMAKE_SOURCE_DIR}/includes)
 
+file(GLOB_RECURSE srcs
+        ./src/*.c
+        ./src/*.cpp
+        ./src/*.h
+        )
+
 # 编译SRC变量所代表的源代码文件，生成main可执行文件
-add_executable(myexe main.cpp src/Gun.cpp src/soldier.cpp src/Log.cpp src/Sockets.cpp)
+add_executable(myexe main.cpp ${srcs})

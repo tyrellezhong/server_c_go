@@ -1,4 +1,4 @@
-{   
+{
     "version": "2.0.0",
     "options": {
         "cwd": "${workspaceFolder}/build"
@@ -24,10 +24,20 @@
             ],
         },
         {
+            "type": "shell",
+            "label": "protoc",
+            "command": "protoc",
+            "args": ["-I=${workspaceFolder}/includes",
+                    "--cpp_out=${workspaceFolder}/src",
+                    "proto_test.proto"
+            ]
+        },
+        {
             "label": "Build",
             "dependsOn":[
                 "cmake",
-                "make"
+                "make",
+                "protoc"
             ]
         }
     ],

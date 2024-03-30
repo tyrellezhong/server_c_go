@@ -80,8 +80,8 @@ int main() {
     // UDPServer();
     // TCPClient();
     //  UDPClient();
-    tutorial::Person Person;
-    auto Descripter = Person.GetDescriptor();
+    // tutorial::Person Person;
+    // auto Descripter = Person.GetDescriptor();
     return 0;
 
 }

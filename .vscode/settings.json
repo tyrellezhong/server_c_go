@@ -12,6 +12,7 @@
     ],
     "C_Cpp.intelliSenseEngine": "disabled",
     // "C_Cpp.intelliSenseEngine": "default",
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "cmake.options.statusBarVisibility": "visible"
 }
 // ./sclient -u 1721701 -c ../etc/sclient.toml

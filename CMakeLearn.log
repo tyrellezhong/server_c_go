@@ -349,3 +349,12 @@
 [Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-03-08 14:54:29 : === Start logging === Mar  8 2024 10:39:51
 
 [INFO] [(Time:2024-03-08 14:54:29) /data/taylorzhong/CMakeLearn/main.cpp:63 main]  start tcp client.
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-03-21 14:51:16 : === Start logging === Mar  8 2024 10:39:51
+
+[INFO] [(Time:2024-03-21 14:51:16) /data/taylorzhong/CMakeLearn/main.cpp:64 main]  start tcp client.
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-03-28 14:21:20 : === Start logging === Mar 28 2024 14:21:16
+
+[INFO] [(Time:2024-03-28 14:21:20) /data/taylorzhong/CMakeLearn/main.cpp:64 main]  start tcp client.
+[Welcome] /data/taylorzhong/CMakeLearn/src/Log.cpp 2024-03-30 16:29:34 : === Start logging === Mar 28 2024 14:21:16
+
+[INFO] [(Time:2024-03-30 16:29:34) /data/taylorzhong/CMakeLearn/main.cpp:64 main]  start tcp client.

@@ -1,5 +1,7 @@
 #include <algorithm>
+#include <chrono>
 #include <cstdint>
+#include <ctime>
 #include <string>
 #include <vector>
 #include "includes/Gun.h"
@@ -12,19 +14,9 @@
 #include <arpa/inet.h>
 #include "Sockets.h"
 #include "src/proto_test.pb.h"
+#include "mychrono.h"
 
 
-
-// template <size_t ...N>
-// static constexpr auto square_nums(size_t index, std::index_sequence<N...>) {
-//     constexpr auto nums = std::array{(N * N)...};
-//     return nums[index];
-// }
-
-// template <size_t N>
-// constexpr static auto const_nums(size_t index) {
-//     return square_nums(index, std::make_index_sequence<N>{});
-// }
 template <int... N>
 struct index_seq {};
 
@@ -35,23 +27,23 @@ struct make_index_seq<0, M...> : public index_seq<M...> {};
 
 
 template <int... N> void print(index_seq<N...>) {
-  // (void)std::initializer_list<int>{((std::cout << N << " "), 0)...};
-  ((std::cout << N << " "), ...);
-  std::cout << std::endl;
+    // (void)std::initializer_list<int>{((std::cout << N << " "), 0)...};
+    ((std::cout << N << " "), ...);
+    std::cout << std::endl;
 }
 
 template <size_t... N> void print(std::index_sequence<N...>) {
-  std::vector<int> res;
-  auto xx = std::initializer_list<int>{((res.push_back(N), std::cout << N << " ", 10))...};
-  std::cout << "list size:" << xx.size() << std::endl;
-  for (auto iter = xx.begin(); iter != xx.end(); ++iter)
-  {
-    std::cout << *iter << " ";
-  }
-  std::cout << std::endl;
-  std::cout << "For each : ";
-  std::for_each(res.begin(), res.end(), [](int x) {std::cout << x << " ";});
-  std::cout << std::endl;
+    std::vector<int> res;
+    auto xx = std::initializer_list<int>{((res.push_back(N), std::cout << N << " ", 10))...};
+    std::cout << "list size:" << xx.size() << std::endl;
+    // for (auto iter = xx.begin(); iter != xx.end(); ++iter)
+    // {
+    //     std::cout << *iter << " ";
+    // }
+    // std::cout << std::endl;
+    // std::cout << "For each : ";
+    // std::for_each(res.begin(), res.end(), [](int x) {std::cout << x << " ";});
+    // std::cout << std::endl;
 }
 
 void SoliderShoot() {
@@ -61,18 +53,8 @@ void SoliderShoot() {
     sanduo.fire();
 }
 int main() {
-    LogInfo("start tcp client.");
-    // int a = 10;
-    // int b = 5;
-    // std::cout << "a > b : " << Greater(a, b) << std::endl;
-    auto t = std::make_index_sequence<10>();
-    // print(t);
-    auto t2 = make_index_seq<5>();
-    print(t2);
-;
-    // std::vector<int32_t> Numbers{0,1,2,3,4,5};
-    // std::string string_test("helloworld");
-    // // static_assert(const_nums<101>(100) == 100 * 100);
+
+    // socket test
 
     // ByteOrderHostTest();
     // ByteOrderTransform();
@@ -80,8 +62,46 @@ int main() {
     // UDPServer();
     // TCPClient();
     //  UDPClient();
-    // tutorial::Person Person;
-    // auto Descripter = Person.GetDescriptor();
+
+    // auto t = std::make_index_sequence<10>();
+    // print(t);
+    // auto t2 = make_index_seq<5>();
+    // print(t2);
+
+    // // tutorial::Person Person;
+    // // auto Descripter = Person.GetDescriptor();
+
+
+    // hours_type h_oneday (24);                  // 24h
+    // seconds_type s_oneday (60*60*24);          // 86400s
+    // milliseconds_type ms_oneday(s_oneday);    // 86400000ms
+
+    // seconds_type s_onehour (60*60);            // 3600s
+    // hours_type h_onehour (std::chrono::duration_cast<hours_type>(s_onehour));
+    // milliseconds_type ms_onehour (s_onehour);  // 3600000ms (ok, no type truncation)
+
+    // std::cout << ms_onehour.count() << "ms in 1h" << std::endl;
+    // return 0;
+    using namespace std::chrono;
+
+    system_clock::time_point tp_epoch;    // epoch value
+
+    time_point <system_clock,duration<int>> tp_seconds (duration<int>(1000));
+
+    system_clock::time_point tp (tp_seconds);
+
+    std::cout << "1 second since system_clock epoch = ";
+    std::cout << tp_seconds.time_since_epoch().count();
+    std::cout << " system_clock periods." << std::endl;
+
+    // display time_point:
+    std::time_t tt = system_clock::to_time_t(tp);
+    std::cout << "time_point tp is: " << ctime(&tt);
+
+    std::time_t tt2 = system_clock::to_time_t(system_clock::now());
+    std::cout << "time_point tp is: " << ctime(&tt2);
+
+    std::vector<int> temp{1,2,3,4,5};
     return 0;
 
 }

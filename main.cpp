@@ -2,6 +2,8 @@
 #include <chrono>
 #include <cstdint>
 #include <ctime>
+#include <istream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include "includes/Gun.h"
@@ -12,11 +14,12 @@
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 #include "Sockets.h"
 #include "src/proto_test.pb.h"
 #include "mychrono.h"
 #include "algorithm.h"
-
+#include "sstream"
 
 template <int... N>
 struct index_seq {};
@@ -53,58 +56,36 @@ void SoliderShoot() {
     sanduo.AddBulletToGun(20);
     sanduo.fire();
 }
-int main() {
-
-    // socket test
-
-    // ByteOrderHostTest();
-    // ByteOrderTransform();
+using namespace std;
+class CStudent
+{
+public:
+    char szName[20];
+    int age;
+};
+int main()
+{
     // TCPServer();
     // UDPServer();
-    // TCPClient();
+    TCPClient();
     //  UDPClient();
+    // char cwd[100];
+    // getcwd(cwd, sizeof(cwd));
+    // CStudent s;
+    // ofstream outFile;
+    // outFile.open("students.dat", ios::out | ios::binary | iostream::trunc);
+    // if (!outFile) {
+    //     std::cout << "error occur" << std::endl;
+    // }
+    // while (cin >> s.szName >> s.age)
+    //     outFile.write((char*)&s, sizeof(s));
+    // outFile.close();
+    // std::cout << "write finish" << cwd << std::endl ;
 
-    // auto t = std::make_index_sequence<10>();
-    // print(t);
-    // auto t2 = make_index_seq<5>();
-    // print(t2);
-
-    // // tutorial::Person Person;
-    // // auto Descripter = Person.GetDescriptor();
-
-
-    // hours_type h_oneday (24);                  // 24h
-    // seconds_type s_oneday (60*60*24);          // 86400s
-    // milliseconds_type ms_oneday(s_oneday);    // 86400000ms
-
-    // seconds_type s_onehour (60*60);            // 3600s
-    // hours_type h_onehour (std::chrono::duration_cast<hours_type>(s_onehour));
-    // milliseconds_type ms_onehour (s_onehour);  // 3600000ms (ok, no type truncation)
-
-    // std::cout << ms_onehour.count() << "ms in 1h" << std::endl;
-    // return 0;
-    // using namespace std::chrono;
-
-    // system_clock::time_point tp_epoch;    // epoch value
-
-    // time_point <system_clock,duration<int>> tp_seconds (duration<int>(1000));
-
-    // system_clock::time_point tp (tp_seconds);
-
-    // std::cout << "1 second since system_clock epoch = ";
-    // std::cout << tp_seconds.time_since_epoch().count();
-    // std::cout << " system_clock periods." << std::endl;
-
-    // // display time_point:
-    // std::time_t tt = system_clock::to_time_t(tp);
-    // std::cout << "time_point tp is: " << ctime(&tt);
-
-    // std::time_t tt2 = system_clock::to_time_t(system_clock::now());
-    // std::cout << "time_point tp is: " << ctime(&tt2);
-
-    // std::vector<int> temp{1,2,3,4,5};
-    TestQsort();
+    std::vector arr{1, 2, 3, 4};
+    for (int& val : arr) {
+        val = val + 10;
+    }
+    printf("%d\n", sizeof(int));
     return 0;
-
 }
-

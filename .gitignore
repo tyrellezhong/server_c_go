@@ -1,2 +1,2 @@
-build
-CMakeLearn.log
+build/
+/*.log

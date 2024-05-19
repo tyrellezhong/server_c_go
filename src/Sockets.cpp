@@ -5,6 +5,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/socket.h>
+#include <iostream>
+#include <string>
 
 void ByteOrderHostTest()
 {
@@ -140,13 +142,18 @@ void TCPClient()
     // 2.连接服务器端
     struct sockaddr_in serveraddr;
     serveraddr.sin_family = AF_INET;
-    inet_pton(AF_INET, "9.135.33.61", &serveraddr.sin_addr.s_addr);
-    serveraddr.sin_port = htons(9999);
+    // http://101.34.255.222:1316/
+    std::string ip = "101.34.255.222";
+    // std::string ip = "9.135.33.61";
+    int ip_port = 1316;
+    inet_pton(AF_INET, ip.c_str(), &serveraddr.sin_addr.s_addr);
+    serveraddr.sin_port = htons(ip_port);
     int ret = connect(fd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
-
     if(ret == -1) {
         perror("connect");
         exit(-1);
+    } else {
+        std::cout << "connection indo : " << "ip : " << ip << " " << "port : " << ip_port << std::endl;
     }
 
 
@@ -156,7 +163,7 @@ void TCPClient()
 
         char * data = "hello,i am client";
         // 给客户端发送数据
-        write(fd, data , strlen(data));
+        // write(fd, data , strlen(data));
 
         sleep(1);
 

@@ -20,6 +20,7 @@
 #include "mychrono.h"
 #include "algorithm.h"
 #include "sstream"
+#include "syntax.h"
 
 template <int... N>
 struct index_seq {};
@@ -65,9 +66,10 @@ public:
 };
 int main()
 {
+    LogInfo("new program begin !!!")
     // TCPServer();
     // UDPServer();
-    TCPClient();
+    // TCPClient();
     //  UDPClient();
     // char cwd[100];
     // getcwd(cwd, sizeof(cwd));
@@ -82,10 +84,11 @@ int main()
     // outFile.close();
     // std::cout << "write finish" << cwd << std::endl ;
 
-    std::vector arr{1, 2, 3, 4};
-    for (int& val : arr) {
-        val = val + 10;
-    }
-    printf("%d\n", sizeof(int));
-    return 0;
+    // std::vector arr{1, 2, 3, 4};
+    // for (int& val : arr) {
+    //     val = val + 10;
+    // }
+    // printf("%d\n", sizeof(int));
+    // return 0;
+    std::cout << "sum:" << sum(5, 1,1,1,1,1) << std::endl;
 }

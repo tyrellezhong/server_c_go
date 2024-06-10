@@ -9,7 +9,6 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/myexe",
-            "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build",
             "environment": [],
@@ -26,6 +25,14 @@
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
+            ],
+            "args":[
+                "-a100",
+                "-b",
+                "200",
+                "-c",
+                "300",
+                "-d"
             ],
             "preLaunchTask": "Build",//使用tasks.json中的哪个label生成可执行文件
             "miDebuggerPath": "/usr/bin/gdb"

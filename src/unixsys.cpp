@@ -1,4 +1,5 @@
 # include "unixsys.h"
+#include <getopt.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <stdio.h>
@@ -79,3 +80,20 @@ int GetFileNum(const char * path) {
 
     return total;
 }
+
+// optarg —— 指向当前选项参数(如果有)的指针。
+// optind —— 再次调用 getopt() 时的下一个 argv指针的索引。
+// optopt —— 最后一个未知选项。
+// opterr ­—— 如果不希望getopt()打印出错信息，则只要将全域变量opterr设为0即可。
+void GetOpt(int argc, char** argv) {
+    const char *string = "a::b:c:d";
+    char opt;
+    while ((opt = getopt(argc, argv, string))!= -1)
+    {  
+        printf("opt = %c\t\t", opt);
+        printf("optarg = %s\t\t",optarg);
+        printf("optind = %d\t\t",optind);
+        printf("argv[optind] = %s\n",argv[optind]);
+    }
+}
+   

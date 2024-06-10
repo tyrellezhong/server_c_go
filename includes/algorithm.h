@@ -2,6 +2,9 @@
 #include <utility>
 #include <vector>
 
+
+extern void TestQsort();
+// 快速排序
 template<class T>
 int FindMid(std::vector<T>& array, int left, int right) {
     int mid = (left + right) / 2;
@@ -43,5 +46,3 @@ void Qsort(std::vector<Tp>& array, int left, int right) {
         Qsort(array, i + 1, right);
     }
 }
-
-extern void TestQsort();

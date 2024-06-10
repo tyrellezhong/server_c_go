@@ -1,8 +1,10 @@
 # cmake 最小版本要求
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.2)
 
 # 项目名称
 project(SOLDIERFIRE)
+
+set(app myexe)
 
 #clangd 配置
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -29,4 +31,4 @@ file(GLOB_RECURSE srcs
         )
 
 # 编译SRC变量所代表的源代码文件，生成main可执行文件
-add_executable(myexe main.cpp ${srcs})
+add_executable(${app} main.cpp ${srcs})

@@ -19,16 +19,6 @@ using namespace std;
 int main(int argc, char **argv)
 {
     LogInfo("begin new program : %s", argv[0]);
-	int opt;
-    const char *string = "a::b:c:d";
-    while ((opt = getopt(argc, argv, string))!= -1)
-    {  
-        printf("opt = %c\t\t", opt);
-        printf("optarg = %s\t\t",optarg);
-        printf("optind = %d\t\t",optind);
-        printf("argv[optind] = %s\n",argv[optind]);
-    }
-
     // TCPServer();
     // UDPServer();
     // TCPClient();
@@ -53,6 +43,6 @@ int main(int argc, char **argv)
     // printf("%d\n", sizeof(int));
     // return 0;
 
-    std::cout << "sum:" << Sum(5, 1,1,1,1,1) << std::endl;
+    // std::cout << "sum:" << Sum(5, 1,1,1,1,1) << std::endl;
     PrintN(make_index_seq<5>());
 }

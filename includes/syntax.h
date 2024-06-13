@@ -2,6 +2,8 @@
 #include <ostream>
 #include <utility>
 #include <vector>
+#include <initializer_list>
+#include <iostream>
 
 
 template <int... N>
@@ -25,8 +27,8 @@ struct make_index_seq<0, M...> : public index_seq<M...> {};
 
 template <int... N> 
 void PrintN(index_seq<N...>) {
-    // (void)std::initializer_list<int>{((std::cout << N << " "), 0)...}; // c++11 包展开, 逗号运算符 ，多个表达式依次执行，返回最后一个表达式的值
-    ((std::cout << N << " "), ...); // c++17 包展开
+    (void)std::initializer_list<int>{((std::cout << N << " "), 0)...}; // c++11 包展开, 逗号运算符 ，多个表达式依次执行，返回最后一个表达式的值
+    // ((std::cout << N << " "), ...); // c++17 折叠表达式
     std::cout << std::endl;
 }
 
@@ -38,3 +40,17 @@ template <size_t... N> void PrintN(std::index_sequence<N...>) {
 
 // c 语言风格可变参数
 extern int Sum(int n, ...);
+
+
+template<typename... Args>
+void print_values(Args... args) {
+    // 生成，括号右结合表达式
+    // static_cast<void>(std::initializer_list<int>{((std::operator<<(std::cout.operator<<(__args0), " ")) , 0) , (((std::operator<<(std::cout.operator<<(__args1), " ")) , 0) , (((std::operator<<(std::cout.operator<<(__args2), " ")) , 0) , ((std::operator<<(std::cout.operator<<(__args3), " ")) , 0)))});
+    (void)std::initializer_list<int>{(((std::cout << args << " "), 0), ...)}; // c++17 折叠表达式
+}
+template<typename... Args>
+void print_values2(Args... args) {
+    // 生成
+    //  static_cast<void>(std::initializer_list<int>{((std::operator<<(std::cout.operator<<(__args0), " ")) , 0), ((std::operator<<(std::cout.operator<<(__args1), " ")) , 0), ((std::operator<<(std::cout.operator<<(__args2), " ")) , 0), ((std::operator<<(std::cout.operator<<(__args3), " ")) , 0)});
+    (void)std::initializer_list<int>{((std::cout << args << " "), 0)...}; // c++11 包展开, 逗号运算符 ，多个表达式依次执行，返回最后一个表达式的值
+}  

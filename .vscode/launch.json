@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "(gdb) cpp Launch",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/myexe",
@@ -36,7 +36,19 @@
             ],
             "preLaunchTask": "Build",//使用tasks.json中的哪个label生成可执行文件
             "miDebuggerPath": "/usr/bin/gdb"
-        }
+        },
+        {
+            "name": "Launch go Package",
+            "type": "go",
+            "request": "launch",
+            "mode": "exec",
+            "program": "${workspaceFolder}/build/main_go",
+            "cwd": "${workspaceFolder}/build",
+            "args":[
+
+            ],
+            "preLaunchTask": "Build",//使用tasks.json中的哪个label生成可执行文件
+        },
 
     ]
 }

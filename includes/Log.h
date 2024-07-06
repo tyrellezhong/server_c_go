@@ -2,6 +2,7 @@
 # define LOG_SYS_H
 
 # include <iostream>
+# include <sstream>
 # include <fstream>
 # include <string>
 # include <time.h>
@@ -52,9 +53,6 @@ g_log.output(mes, priority); \
  \
 } while (0);
 
-
-
-
 class Logger
 {
 public:
@@ -72,6 +70,17 @@ private:
 	string path;              // 日志文件路径
 	log_level level;          // 日志等级
 };
+
+// 打印容器元素的模板函数
+template <typename Container>
+void PrintElements(const Container& container) {
+    std::ostringstream oss;
+    for (const auto& element : container) {
+        oss << element << " ";
+    }
+
+    LogInfo("%s", oss.str().c_str());
+}
 
 # endif
 

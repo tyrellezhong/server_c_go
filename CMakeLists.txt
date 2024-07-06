@@ -32,3 +32,5 @@ file(GLOB_RECURSE srcs
 
 # 编译SRC变量所代表的源代码文件，生成main可执行文件
 add_executable(${app} main.cpp ${srcs})
+
+add_subdirectory(gomod)

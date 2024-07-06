@@ -1,6 +1,8 @@
 #include "std_example.h"
+#include <algorithm>
 #include <deque>
 #include <forward_list>
+#include <functional>
 #include <initializer_list>
 #include <queue>
 #include <stack>
@@ -32,11 +34,13 @@ void StdContainers::VectorTest() {
     std::vector<int> vector(5);
     vector.insert(vector.begin(), 5, 5);
     vector.assign(10, 0);
-    std::initializer_list<int> xx{1, 2, 3, 4};
+    std::initializer_list<int> xx{1, 2, 3, 4, 3, 11, 8, 0, 10};
     vector = xx;
     vector.erase(vector.begin());
     vector.pop_back();
     vector.push_back(9);
+    std::sort(vector.begin(), vector.end(), std::greater<int>());
+    
     PrintElements(vector);
 }
 
@@ -62,7 +66,9 @@ void StdContainers::StringTest() {
     std::string str3x = "0x1A"; // 16 进制
     std::string str4 = "075";  // 8 进制
     std::string str5 = "invalid";
+    std::sort(str5.begin(), str5.end());
 
+    
     try {
         int num1 = std::stoi(str1);
         std::cout << "num1: " << num1 << std::endl;
@@ -109,7 +115,6 @@ void StdContainers::ListTest() {
 
     std::list<int> list1 = {7, 5, 3, 1};
     std::list<int> list2 = {8, 6, 4, 2};
-    
 
     list1.merge(list2, customCompare);
 
@@ -122,7 +127,10 @@ void StdContainers::ListTest() {
     std::cout << "Size of list2: " << list2.size() << std::endl;
 
     std::forward_list<int> for_list;
-    for_list.assign({1, 2, 3});
+    for_list.assign({1, 2, 3, 0, 9, 8, 7});
+    for_list.sort();
+    PrintElements(for_list);
+
 }
 
 void StdContainers::UnorderedSetTest() {

@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 {
     LogInfo("begin new program : %s", argv[0]);
     
-
+    StdContainers containertest;
+    containertest.AllTest();
     PrintN(make_index_seq<5>());
 }

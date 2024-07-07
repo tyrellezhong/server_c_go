@@ -60,6 +60,9 @@ void StdContainers::StringTest() {
     auto ret2 = str.find("abc");
     auto ret3 = str.find_first_of("dcb");
 
+    std::string ch = "中文测试";
+    std::cout << "ch :  " << ch << "len" << ch.size() << std::endl;
+
     std::string x(5, 'a');
     std::string str1 = "123";
     std::string str2x = "456abc";

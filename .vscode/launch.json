@@ -38,7 +38,7 @@
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
-            "name": "Launch go Package",
+            "name": "(go) Launch",
             "type": "go",
             "request": "launch",
             "mode": "exec",

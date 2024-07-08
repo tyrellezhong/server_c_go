@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(Python) current file",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "(gdb) cpp Launch",
             "type": "cppdbg",
             "request": "launch",
@@ -26,7 +33,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "args":[
+            "args": [
                 "-a100",
                 "-b",
                 "200",
@@ -34,7 +41,7 @@
                 "300",
                 "-d"
             ],
-            "preLaunchTask": "Build",//使用tasks.json中的哪个label生成可执行文件
+            "preLaunchTask": "Build", //使用tasks.json中的哪个label生成可执行文件
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
@@ -44,11 +51,8 @@
             "mode": "exec",
             "program": "${workspaceFolder}/build/main_go",
             "cwd": "${workspaceFolder}/build",
-            "args":[
-
-            ],
-            "preLaunchTask": "Build",//使用tasks.json中的哪个label生成可执行文件
+            "args": [],
+            "preLaunchTask": "Build", //使用tasks.json中的哪个label生成可执行文件
         },
-
     ]
 }

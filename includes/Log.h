@@ -82,5 +82,8 @@ void PrintElements(const Container& container) {
     LogInfo("%s", oss.str().c_str());
 }
 
+extern void DebugBegin(std::string InInfo);
+
+
 # endif
 

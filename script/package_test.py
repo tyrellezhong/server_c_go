@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 #coding=utf-8
 
+import datetime
 import getopt
 import os
 import sys
+import time
 
 # 闭包测试
 def make_accumulator():
@@ -16,12 +18,31 @@ def make_accumulator():
 
     return accumulator
 
+def time_test():
+    timestamp = time.time()
+    print("timestamp", timestamp)
+    # 获取当前时间并格式化
+    utc_time = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(timestamp))
+    print("UTC 时间:", utc_time)
+    formatted_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp))
+    print("格式化后的当前时间:", formatted_time)
+    c_time = time.ctime(timestamp)
+    print("c_time:", c_time, "\n asctime:", time.asctime())
 
-class TestClass:
-    name = "testclass"
+        # 获取当前日期和时间
+    now = datetime.datetime.now()
+    print("当前日期和时间:", now)
 
-if __name__ == "__main__":
+def os_test():
+    print(os.getcwd())
+    print(os.chdir(os.path.dirname(__file__)))
+    print(os.path.basename(__file__))
+    print(os.getcwd())
+    print(os.path.exists(os.getcwd() + "/file"))
+    print(os.path.isfile(os.getcwd() + "/file"))
+    print(os.listdir(os.getcwd()))
 
+def getopt_test():
     namespace = ""
     processname = ""
     yaml_name = ""
@@ -52,26 +73,23 @@ if __name__ == "__main__":
         elif opt in ("i", "--desip"):
             destination_ip = arg
 
-    test_class = TestClass()
-    print(test_class)
-    print(test_class.__dict__)
-    print(__file__)
-    print(os.getcwd())
-    print(os.chdir(os.path.dirname(__file__)))
-    print(os.path.basename(__file__))
-    print(os.getcwd())
-    print(os.path.exists(os.getcwd() + "/file"))
-    print(os.path.isfile(os.getcwd() + "/file"))
-    print(os.listdir(os.getcwd()))
+
+class TestClass:
+    name = "testclass"
+
+if __name__ == "__main__":
+
+    # 列表推导
     li = [1, 2, 3, 4, 5]
-    print([ item * 2 for item in li if item % 2 == 0])
+    print("列表推导：", [ item * 2 for item in li if item % 2 == 0])
 
     # 使用累加器
     # 创建一个累加器实例
     acc = make_accumulator()
-    print(acc(10))  # 输出: 10
-    print(acc(5))   # 输出: 15
-    print(acc(3))   # 输出: 18
+    print("闭包累加器：", acc(10), acc(5), acc(3))  # 输出: 10 15 18
+    time_test()
+
+
 
 
 

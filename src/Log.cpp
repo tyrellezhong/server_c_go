@@ -105,3 +105,8 @@ extern string BaseFunctionName(const string& FullName)
 	string functionName;
 	return functionName;
 }
+
+
+void DebugBegin(std::string InInfo) {
+    LogInfo("----------------%s------------------", InInfo.c_str());
+}

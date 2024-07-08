@@ -6,6 +6,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func Sum(a, b int) int {
@@ -134,5 +135,31 @@ func ListTest() {
 	for n := li.Front(); n != nil; n = n.Next() {
 		fmt.Println(n.Value)
 	}
+
+}
+
+func TimeTest() {
+	now := time.Now() //获取当前时间
+	fmt.Printf("current time:%v\n", now)
+	year := now.Year()     //年
+	month := now.Month()   //月
+	day := now.Day()       //日
+	hour := now.Hour()     //小时
+	minute := now.Minute() //分钟
+	second := now.Second() //秒
+	fmt.Printf("%d-%02d-%02d %02d:%02d:%02d\n", year, month, day, hour, minute, second)
+
+	timestamp := now.Unix()            //时间戳
+	timeObj := time.Unix(timestamp, 0) //将时间戳转为时间格式
+	fmt.Println(timeObj)
+
+	fmt.Println(now.Format("2006-01-02 15:04:05.000 Mon Jan"))
+
+	var layout string = "2006-01-02 15:04:05"
+	var timeStr string = "2019-12-12 15:22:12"
+	timeObj1, _ := time.Parse(layout, timeStr)
+	fmt.Println(timeObj1)
+	timeObj2, _ := time.ParseInLocation(layout, timeStr, time.Local)
+	fmt.Println(timeObj2)
 
 }

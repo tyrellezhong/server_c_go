@@ -1,11 +1,14 @@
 #include "std_example.h"
 #include <algorithm>
+#include <array>
+#include <cstddef>
 #include <deque>
 #include <forward_list>
 #include <functional>
 #include <initializer_list>
 #include <queue>
 #include <stack>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 #include "Log.h"
@@ -22,7 +25,7 @@ void StdContainers::AllTest() {
     ListTest();
     UnorderedSetTest();
     UnorderedMapTest();
-    
+
     SetTest();
     MapTest();
     MinPqTest();
@@ -40,7 +43,7 @@ void StdContainers::VectorTest() {
     vector.pop_back();
     vector.push_back(9);
     std::sort(vector.begin(), vector.end(), std::greater<int>());
-    
+
     PrintElements(vector);
 }
 
@@ -71,7 +74,7 @@ void StdContainers::StringTest() {
     std::string str5 = "invalid";
     std::sort(str5.begin(), str5.end());
 
-    
+
     try {
         int num1 = std::stoi(str1);
         std::cout << "num1: " << num1 << std::endl;
@@ -106,7 +109,7 @@ void StdContainers::DequeTest() {
     std::stack<int> stack;
 
     std::queue<int> queue;
-    
+
 }
 
 bool customCompare(int a, int b) {
@@ -158,6 +161,26 @@ void StdContainers::UnorderedSetTest() {
     PrintElements(unordered_set_);
 }
 
+// 自定义哈希函数
+template <typename T, std::size_t N>
+struct ArrayHash {
+    std::size_t operator()(const std::array<T, N>& arr) const {
+        std::size_t hash = 0;
+        for (const auto& elem : arr) {
+            hash ^= std::hash<T>()(elem) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+        }
+        return hash;
+    }
+};
+
+// 自定义相等性比较函数
+template <typename T, std::size_t N>
+struct ArrayEqual {
+    bool operator()(const std::array<T, N>& lhs, const std::array<T, N>& rhs) const {
+        return lhs == rhs;
+    }
+};
+
 void StdContainers::UnorderedMapTest() {
     LogInfo(kBeginFlag, "UnorderedMapTest");
     auto ret1 = unordered_map_.insert(std::make_pair(1, 1));
@@ -171,6 +194,39 @@ void StdContainers::UnorderedMapTest() {
         LogInfo("find key %d success", 4);
     }
     // PrintElements(unordered_map_);
+    for (auto [key, value] : unordered_map_) {
+        LogDebug("key:%d value:%d", key, value);
+    }
+
+    auto hash_key = [](const std::array<char, 26>& arr) {
+        std::size_t hash = 0;
+        for (const char& item : arr) {
+            hash ^= std::hash<char>()(item) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+        }
+        return hash;
+    };
+    auto hash_equal = [](const std::array<char, 26>& la, const std::array<char, 26>& ra) {
+        return la == ra;
+    };
+
+    std::unordered_map<std::array<char, 26>, std::vector<std::string>, decltype(hash_key), decltype(hash_equal)> dic(10, hash_key, hash_equal);
+
+    // 使用 std::array 作为键值的 unordered_map
+    std::unordered_map<std::array<char, 26>, std::string, ArrayHash<int, 3>, ArrayEqual<int, 3>> myMap;
+
+    // // 插入元素
+    // myMap.emplace(std::array<int, 3>{1, 2, 3}, "First");
+    // myMap.emplace(std::array<int, 3>{4, 5, 6}, "Second");
+
+    // // 查找元素
+    // std::array<int, 3> keyToFind = {1, 2, 3};
+    // auto it = myMap.find(keyToFind);
+    // if (it != myMap.end()) {
+    //     std::cout << "Found: " << it->second << std::endl;
+    // } else {
+    //     std::cout << "Not found" << std::endl;
+    // }
+
 }
 
 void StdContainers::MinPqTest() {

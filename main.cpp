@@ -24,8 +24,8 @@ int main(int argc, char **argv)
 {
     LogInfo("begin new program : %s", argv[0]);
 
-    // StdContainers containertest;
-    // containertest.AllTest();
+    StdContainers containertest;
+    containertest.AllTest();
 
     TimeTest time_test;
     time_test.ChronoTimeTest();

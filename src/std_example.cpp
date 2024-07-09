@@ -261,3 +261,47 @@ void StdContainers::MapTest() {
 void StdContainers::SetTest() {
 
 }
+
+void AllocatorTest::StdAllocatorTest() {
+    // 创建一个 std::allocator 对象，用于分配 int 类型的内存
+    std::allocator<int> allocator;
+
+    // 分配内存，足够存储 5 个 int 对象
+    int* p = allocator.allocate(5);
+
+    // 在分配的内存上构造对象
+    for (int i = 0; i < 5; ++i) {
+        allocator.construct(p + i, i * 10);  // 构造值为 i * 10 的 int 对象
+    }
+
+    // 使用分配的内存
+    for (int i = 0; i < 5; ++i) {
+        std::cout << p[i] << " ";  // 输出：0 10 20 30 40
+    }
+    std::cout << std::endl;
+
+    // 销毁对象
+    for (int i = 0; i < 5; ++i) {
+        allocator.destroy(p + i);
+    }
+
+    // 释放内存
+    allocator.deallocate(p, 5);
+}
+
+void AllocatorTest::SelfAllocatorTset() {
+    // 使用自定义分配器的 std::vector
+    std::vector<int, MyAllocator<int>> myVector;
+
+    // 插入元素
+    myVector.push_back(10);
+    myVector.push_back(20);
+    myVector.push_back(30);
+
+    // 输出元素
+    for (const auto& elem : myVector) {
+        std::cout << elem << " ";  // 输出：10 20 30
+    }
+    std::cout << std::endl;
+
+}

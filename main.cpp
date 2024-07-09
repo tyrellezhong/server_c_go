@@ -33,4 +33,8 @@ int main(int argc, char **argv)
 
     std::cout << "make_index_seq : ";
     PrintN(make_index_seq<5>());
+
+    AllocatorTest allocatoer;
+    allocatoer.StdAllocatorTest();
+    allocatoer.SelfAllocatorTset();
 }

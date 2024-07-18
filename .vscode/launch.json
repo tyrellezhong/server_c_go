@@ -52,6 +52,7 @@
             "mode": "exec",
             "program": "${workspaceFolder}/build/main_go",
             "cwd": "${workspaceFolder}/build",
+            // "buildFlags": "-gcflags='all=-N -l'",  // 禁用编译优化
             "args": [],
             "preLaunchTask": "Build", //使用tasks.json中的哪个label生成可执行文件
         },

@@ -156,10 +156,36 @@ func TimeTest() {
 	fmt.Println(now.Format("2006-01-02 15:04:05.000 Mon Jan"))
 
 	var layout string = "2006-01-02 15:04:05"
-	var timeStr string = "2019-12-12 15:22:12"
+	var timeStr string = "2024-07-17 5:00:00"
 	timeObj1, _ := time.Parse(layout, timeStr)
 	fmt.Println(timeObj1)
 	timeObj2, _ := time.ParseInLocation(layout, timeStr, time.Local)
 	fmt.Println(timeObj2)
+
+	// 加载不同的时区
+	locNY, _ := time.LoadLocation("America/New_York")
+	locLA, _ := time.LoadLocation("America/Los_Angeles")
+
+	// 使用不同的时区解析时间
+	tNY, _ := time.ParseInLocation(layout, timeStr, locNY)
+	tLA, _ := time.ParseInLocation(layout, timeStr, locLA)
+	tCN, _ := time.ParseInLocation(layout, timeStr, time.Local)
+	utc, _ := time.Parse(layout, timeStr)
+	ut2, _ := time.ParseInLocation(layout, timeStr, time.UTC)
+
+	fmt.Println("utc time ", utc)
+	fmt.Println("utc2 time ", ut2)
+	fmt.Println("Parsed time (New York):", tNY)
+	fmt.Println("Parsed time (Los Angeles):", tLA)
+	fmt.Println("Parsed time (Cn):", tCN)
+
+	// 比较两个时间
+	fmt.Println("Is New York time before Los Angeles time?", tNY.Before(tLA))
+	fmt.Println("Is New York time before CN time?", tNY.Before(tCN))
+	fmt.Println("Is New York time before utc time?", tNY.Before(utc))
+	fmt.Println("Is cn time before utc time?", tCN.Before(utc))
+	futureTime := tNY.Add(time.Hour)
+	fmt.Println("Is now time before future time? ", tNY.Before(futureTime), tNY, futureTime)
+	fmt.Println("Is cn time after new york time? ", now.After(tNY), now, tNY)
 
 }

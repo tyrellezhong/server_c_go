@@ -203,3 +203,19 @@ func suffixOf(filename string) string {
 	}
 	return suffix
 }
+
+func JsonMarshalTest() {
+	testJson := Invoice{
+		Id:         11,
+		CustomerId: 22,
+		Raised:     time.Now(),
+		Due:        time.Now().Add(time.Hour),
+	}
+	bytes, _ := testJson.MarshalJSON()
+	fmt.Println("marshaled : ", string(bytes))
+
+	err := testJson.UnmarshalJSON(bytes)
+	if err != nil {
+		fmt.Println("unmarshal failed")
+	}
+}

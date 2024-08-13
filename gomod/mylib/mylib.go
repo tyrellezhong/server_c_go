@@ -165,6 +165,7 @@ func TimeTest() {
 	// 加载不同的时区
 	locNY, _ := time.LoadLocation("America/New_York")
 	locLA, _ := time.LoadLocation("America/Los_Angeles")
+	// locBJ, _ := time.LoadLocation("Asia/Shanghai")
 
 	// 使用不同的时区解析时间
 	tNY, _ := time.ParseInLocation(layout, timeStr, locNY)
@@ -188,4 +189,58 @@ func TimeTest() {
 	fmt.Println("Is now time before future time? ", tNY.Before(futureTime), tNY, futureTime)
 	fmt.Println("Is cn time after new york time? ", now.After(tNY), now, tNY)
 
+}
+
+func TimeParse() {
+	// locBJ, _ := time.LoadLocation("Asia/Shanghai")
+	// locBJ, _ := time.LoadLocation("")
+	locNY, _ := time.LoadLocation("America/New_York")
+
+	// var layout string = "2006-01-02 15:04:05"
+	layout2 := "15:04:05"
+	// src := "2024-07-17 5:00:00  "
+	src2 := "08:00:00 |  0"
+	dst := strings.Split(src2, "|")
+	dst[0] = strings.TrimSpace(dst[0])
+	if len(dst) > 1 {
+		dst[1] = strings.TrimSpace(dst[1])
+	}
+	fmt.Println(dst)
+	parsetime, err := time.ParseInLocation(layout2, dst[0], locNY)
+	// parsetime2, err := time.ParseInLocation(layout2, dst[0], time.UTC)
+
+	// fmt.Println("unix1", parsetime.Unix(), "unix2", parsetime2.Unix(), "diff", (parsetime2.Unix()-parsetime.Unix())/60/60)
+
+	// fmt.Printf("locBJ: %v\n", locBJ)
+	fmt.Printf("location: %v \n", parsetime.Location())
+	fmt.Println(parsetime, parsetime.Hour(), parsetime.Minute(), parsetime.Second())
+
+	if err == nil {
+		fmt.Println("parse time : ", parsetime)
+	} else {
+		fmt.Println("parse failed", err)
+	}
+	fmt.Println("new york now is", time.Now().In(parsetime.Location()))
+
+}
+
+func RangeTest() {
+	sliceTest := []int{9, 8, 7}
+	mapTest := map[int]int{1: 9, 2: 8, 3: 7}
+
+	for idx := range sliceTest {
+		fmt.Print(idx)
+	}
+	fmt.Println()
+	for idx, value := range sliceTest {
+		fmt.Print(" ", idx, " ", value)
+	}
+	fmt.Println()
+	for key := range mapTest {
+		print("key:", key)
+	}
+	fmt.Println()
+	for key, value := range mapTest {
+		fmt.Print(" key : ", key, " value: ", value)
+	}
 }

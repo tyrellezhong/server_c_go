@@ -11,12 +11,14 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"time"
 )
 
 type Website struct {
-	Name   string `xml:"name,attr"`
-	Url    string
-	Course []string
+	Name      string `xml:"name,attr"`
+	Url       string
+	Course    []string
+	TimeStamp int64
 }
 
 func FileRW() {
@@ -49,8 +51,8 @@ func FileRW() {
 
 func WriteJson() {
 	info := []Website{
-		{"Golang", "http://c.biancheng.net/golang/", []string{"http://c.biancheng.net/cplus/", "http://c.biancheng.net/linux_tutorial/"}},
-		{"Java", "http://c.biancheng.net/java/", []string{"http://c.biancheng.net/socket/", "http://c.biancheng.net/python/"}},
+		{"Golang", "http://c.biancheng.net/golang/", []string{"http://c.biancheng.net/cplus/", "http://c.biancheng.net/linux_tutorial/"}, 11},
+		{"Java", "http://c.biancheng.net/java/", []string{"http://c.biancheng.net/socket/", "http://c.biancheng.net/python/"}, 22},
 	}
 	// 创建文件
 	filePtr, err := os.Create("info.json")
@@ -76,8 +78,11 @@ func ReadJson() {
 		return
 	}
 	defer filePtr.Close()
+	out, _ := io.ReadAll(filePtr)
+	fmt.Println("out : ", string(out))
 	var info []Website
 	// 创建json解码器
+	filePtr.Seek(0, 0)
 	decoder := json.NewDecoder(filePtr)
 	err = decoder.Decode(&info)
 	if err != nil {
@@ -91,7 +96,7 @@ func ReadJson() {
 func WriteXml() {
 
 	//实例化对象
-	info := Website{"C语言中文网", "http://c.biancheng.net/golang/", []string{"Go语言入门教程", "Golang入门教程"}}
+	info := Website{"C语言中文网", "http://c.biancheng.net/golang/", []string{"Go语言入门教程", "Golang入门教程"}, 11}
 	f, err := os.Create("./info.xml")
 	if err != nil {
 		fmt.Println("文件创建失败", err.Error())
@@ -100,6 +105,7 @@ func WriteXml() {
 	defer f.Close()
 	//序列化到文件中
 	encoder := xml.NewEncoder(f)
+	encoder.Indent("", "  ")
 	err = encoder.Encode(info)
 	if err != nil {
 		fmt.Println("编码错误：", err.Error())
@@ -118,6 +124,9 @@ func ReadXml() {
 	}
 	defer file.Close()
 	info := Website{}
+	readInfo, _ := io.ReadAll(file)
+	fmt.Println("readinfo:", string(readInfo))
+	file.Seek(0, 0)
 	//创建 xml 解码器
 	decoder := xml.NewDecoder(file)
 	err = decoder.Decode(&info)
@@ -360,4 +369,41 @@ func ReadZip() {
 		}
 		rc.Close()
 	}
+}
+
+// 定义一个结构体来包装 map 数据
+type TimeMap struct {
+	Entries []Entry
+}
+
+// 定义一个结构体来表示 map 的每个条目
+type Entry struct {
+	Key   int32
+	Value time.Time
+}
+
+func MarshalXmlTest() {
+	timex, _ := time.Parse("2006-01-02 15:04:05", "2024-06-01 00:00:00")
+	timeMap := map[int32]time.Time{
+		1: timex,
+		2: timex.Add(time.Hour * 24),
+	}
+
+	// 将 map 数据转换为 TimeMap 结构体
+	var entries []Entry
+	for k, v := range timeMap {
+		entries = append(entries, Entry{Key: k, Value: v})
+	}
+	timeMapStruct := &TimeMap{Entries: entries}
+
+	// 序列化为 XML
+	// 传入对象可以是结构体指针或者结构体
+	xmlData, err := xml.MarshalIndent(timeMapStruct, "", "  ")
+	if err != nil {
+		fmt.Println("Error marshaling to XML:", err)
+		return
+	}
+
+	// 打印 XML 数据
+	fmt.Println(string(xmlData))
 }

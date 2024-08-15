@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3.11
+#coding=utf-8
 
 import argparse
 
@@ -7,7 +7,7 @@ import argparse
 parser = argparse.ArgumentParser(description="arg parse")
 
 # 添加命令行参数
-parser.add_argument('-f', "--foo", help='foo help')
+parser.add_argument('--foo', help='foo help')
 parser.add_argument('bar', help='bar help')
 
 # 解析命令行参数

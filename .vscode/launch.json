@@ -9,8 +9,10 @@
             "type": "debugpy",
             "request": "launch",
             "program": "${file}",
-            // "console": "integratedTerminal"
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "args": [
+                "xxx"
+            ]
         },
         {
             "name": "(gdb) cpp Launch",

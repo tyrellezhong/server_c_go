@@ -1,27 +1,42 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
+	"gomod/gogenerate"
 	"gomod/httpex"
+	"os"
+	"text/template"
 )
 
-// "github.com/gin-gonic/gin"
-
-func getValues() (int, int) {
-	return 10, 20
-}
-
-// func main() {
-// 	x := 5 // 已经声明的变量
-
-// 	// 短变量声明，同时赋值给已经声明的变量 x 和新变量 y
-// 	x, y := getValues()
-
-// 	fmt.Println("x:", x) // 输出: x: 10
-// 	fmt.Println("y:", y) // 输出: y: 20
-// }
+//go:embed service.gotpl
+var serviceTemplate string
 
 func main() {
+	// 解析模板
+	tmpl, err := template.New("service").Parse(serviceTemplate)
+	if err != nil {
+		fmt.Println("Error parsing template:", err)
+		return
+	}
+
+	// 定义模板数据
+	data := struct {
+		PackageName string
+		ServiceName string
+	}{
+		PackageName: "example",
+		ServiceName: "ExampleService",
+	}
+
+	// 执行模板并输出到标准输出
+	err = tmpl.Execute(os.Stdout, data)
+	if err != nil {
+		fmt.Println("Error executing template:", err)
+	}
+}
+
+func main2() {
 	fmt.Println("hello world begin ! -------------")
 	// riskInfo := &PayRickControlInfo{
 	// 	AdultStatus:         -1,
@@ -50,4 +65,8 @@ func main() {
 	// 	fmt.Println("is zero")
 	// }
 
+	days := []gogenerate.Weekday{gogenerate.Sunday, gogenerate.Monday, gogenerate.Tuesday}
+	for _, day := range days {
+		fmt.Println(day.String())
+	}
 }

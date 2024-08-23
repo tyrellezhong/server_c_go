@@ -1,0 +1,7 @@
+{{ define "service" }}
+package {{ .PackageName }}
+
+type {{ .ServiceName }} struct {
+    // Service implementation
+}
+{{ end }}

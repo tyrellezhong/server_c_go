@@ -1,9 +1,9 @@
 {
-    "clangd.path": "/data/taylorzhong/workStudio/Server/tools/dev/vscode/clangd",
+    // "clangd.path": "/usr/bin/clangd",
     "editor.inlayHints.enabled": "off",
     "clangd.arguments": [
         "--compile-commands-dir=${workspaceFolder}/build",
-        "--resource-dir=/data/taylorzhong/workStudio/Server/tools/dev/vscode/clang",
+        // "--resource-dir=/usr/bin/clangd",
         "--clang-tidy",
         "--completion-style=detailed",
         "--header-insertion=iwyu",

@@ -63,6 +63,7 @@ func WriteJson() {
 	defer filePtr.Close()
 	// 创建Json编码器
 	encoder := json.NewEncoder(filePtr)
+	encoder.SetIndent("", "    ")
 	err = encoder.Encode(info)
 	if err != nil {
 		fmt.Println("编码错误", err.Error())
@@ -185,8 +186,7 @@ func WriteText() {
 
 func ReadText() {
 	//打开文件
-	// file, err := os.Open("./output.txt")
-	file, err := os.Open("./window_text.txt")
+	file, err := os.Open("./output.txt")
 	if err != nil {
 		fmt.Println("文件打开失败 = ", err)
 	}

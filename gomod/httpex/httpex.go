@@ -2,6 +2,7 @@ package httpex
 
 import (
 	"fmt"
+	"net/http"
 	"net/url"
 )
 
@@ -61,4 +62,47 @@ func UrlDecode() {
 	fmt.Println("Hobbies:", hobbies) // 输出: Hobbies: [reading travelling]
 	fmt.Println("special:", special)
 
+}
+
+func HandlerRedirect(w http.ResponseWriter, r *http.Request) {
+	// 设置响应头的 Content-Type 为 text/html
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	// 构建 HTML 内容，包含自动跳转的 meta 标签
+	htmlContent := `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="refresh" content="5;url=https://www.google.com">
+        <title>自动跳转示例</title>
+    </head>
+    <body>
+        <h1>欢迎来到我的网站!</h1>
+        <p>您将在 5 秒后自动跳转到 Google。</p>
+        <p>如果没有自动跳转，请点击 <a href="https://www.google.com">这里</a>.</p>
+    </body>
+    </html>
+    `
+
+	// 写入响应
+	fmt.Fprint(w, htmlContent)
+}
+
+func HandlerRedirect2(w http.ResponseWriter, r *http.Request) {
+	// 使用 HTTP 302 重定向到目标 URL
+	http.Redirect(w, r, "https://www.google.com", http.StatusFound)
+}
+
+func HttpSvr() {
+	// 设置路由和处理函数
+	http.HandleFunc("/", HandlerRedirect)
+	http.HandleFunc("/redirect", HandlerRedirect2)
+
+	// 启动 HTTP 服务器
+	fmt.Println("服务器正在运行，访问 http://localhost:8080")
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		fmt.Println("服务器启动失败:", err)
+	}
 }

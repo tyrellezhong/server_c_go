@@ -3,9 +3,13 @@ package main
 import (
 	_ "embed"
 	"fmt"
-	"gomod/filerw"
-	"gomod/httpex"
 )
+
+type BKResult struct {
+	Message string `json:"message"`
+	Code    string `json:"code"`
+	Result  bool   `json:"result"`
+}
 
 func main() {
 	fmt.Println("hello world begin ! -------------")
@@ -27,8 +31,8 @@ func main() {
 	// // reflecttest.ReflectTest()
 	// mylib.TimeParse()
 
-	httpex.UrlEncode()
-	httpex.UrlDecode()
+	// httpex.UrlEncode()
+	// httpex.UrlDecode()
 
 	// testmap := make(map[int]int)
 	// value := testmap[1]
@@ -41,5 +45,15 @@ func main() {
 	// 	fmt.Println(day.String())
 	// }
 	// 文件读写测试
-	filerw.FileRW()
+	// filerw.FileRW()
+
+	// httpex.HttpSvr()
+
+	bk := &BKResult{
+		Message: "zzz",
+		Code:    "aa",
+		Result:  false,
+	}
+	fmt.Println(bk)
+	// log.Println(bk)
 }

@@ -2,6 +2,7 @@ package httpex
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 )
@@ -95,10 +96,69 @@ func HandlerRedirect2(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "https://www.google.com", http.StatusFound)
 }
 
+func EchoHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		// 解析表单数据
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "Failed to parse form", http.StatusBadRequest)
+			return
+		}
+
+		// 获取消息
+		message := r.FormValue("message")
+
+		// 回显消息
+		fmt.Fprintf(w, "Received message: %s", message)
+	} else {
+		// 显示一个简单的表单
+		w.Header().Set("Content-Type", "text/html")
+		fmt.Fprintf(w, `
+			<!DOCTYPE html>
+			<html>
+			<head>
+				<title>Echo Service</title>
+			</head>
+			<body>
+				<form method="POST" action="/">
+					<label for="message">Message:</label>
+					<input type="text" id="message" name="message">
+					<input type="submit" value="Send">
+				</form>
+			</body>
+			</html>
+		`)
+	}
+}
+
+func EchoHandler2(w http.ResponseWriter, r *http.Request) {
+	// 打印请求方法和 URL
+	fmt.Printf("Method: %s, URL: %s\n", r.Method, r.URL)
+
+	// 打印请求头
+	fmt.Println("Headers:")
+	for name, values := range r.Header {
+		for _, value := range values {
+			fmt.Printf("%s: %s\n", name, value)
+		}
+	}
+
+	// 打印请求体
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, "Failed to read request body", http.StatusInternalServerError)
+		return
+	}
+	fmt.Printf("Body: %s\n", string(body))
+
+	// 回显消息
+	fmt.Fprintf(w, "Received message: %s", string(body))
+}
+
 func HttpSvr() {
 	// 设置路由和处理函数
-	http.HandleFunc("/", HandlerRedirect)
-	http.HandleFunc("/redirect", HandlerRedirect2)
+	http.HandleFunc("/redirect1", HandlerRedirect)
+	http.HandleFunc("/redirect2", HandlerRedirect2)
+	http.HandleFunc("/", EchoHandler2)
 
 	// 启动 HTTP 服务器
 	fmt.Println("服务器正在运行，访问 http://localhost:8080")

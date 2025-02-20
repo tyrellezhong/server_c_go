@@ -14,6 +14,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -g -Wall")
 
 set(CMAKE_CXX_STANDARD 17)
 
+# 显示编译器
+message(STATUS "C Compiler: ${CMAKE_C_COMPILER}")
+message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER}")
 
 # 设定编译类型为debug，调试时需要选择debug
 set(CMAKE_BUILD_TYPE Debug)

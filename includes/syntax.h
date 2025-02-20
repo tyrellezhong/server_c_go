@@ -17,6 +17,7 @@ struct index_seq {};
 // 1 1 2 3 4
 // 0 0 1 2 3 4
 // 0 1 2 3 4 
+// index_seq<0, 1, 2, 3, 4>{}
 template <int N, int... M>
 struct make_index_seq : public make_index_seq<N - 1, N - 1, M...> {};
 

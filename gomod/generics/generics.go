@@ -24,3 +24,35 @@ func TestSumIntsOrFloats() {
 	floatMap := map[string]float64{"a": 1.1, "b": 2.2, "c": 3.3}
 	fmt.Printf("Sums %d, %f", SumIntsOrFloats[string, int64](intMap), SumIntsOrFloats(floatMap))
 }
+
+// Vector 是一个泛型切片类型
+// T 可以是任意类型(any)
+type Vector[T any] []T
+
+func (v *Vector[T]) Push(value T) {
+	*v = append(*v, value)
+}
+
+// intVec 是一个int类型的Vector实例
+var intVec Vector[int]
+
+// stringVec 是一个string类型的Vector实例
+var stringVec Vector[string]
+
+func ExampleVectorPUSH() {
+	intVec.Push(1)
+	stringVec.Push("hello")
+}
+
+// AnyString 是一个字符串类型的泛型约束
+// string 和 ~string取交集，得到仅仅支持string，不支持Mystring
+type AnyString interface {
+	~string
+	// string
+}
+
+type MyString string
+
+func SayHi[T AnyString](v T) {
+	fmt.Println("Hello, World!", v)
+}

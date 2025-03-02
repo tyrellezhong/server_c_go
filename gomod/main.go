@@ -2,7 +2,7 @@ package main
 
 import (
 	_ "embed"
-	"fmt"
+	"gomod/generics"
 )
 
 type BKResult struct {
@@ -33,42 +33,8 @@ func groupAnagrams(strs []string) [][]string {
 	return ret
 }
 func main() {
-	fmt.Println("hello world begin ! -------------")
-	arr := []string{"eat", "tea", "tan", "ate", "nat", "bat"}
 
-	groupAnagrams(arr)
-}
-func longestConsecutive(nums []int) int {
-	dic := make(map[int]bool)
-	ret := 0
-	for _, value := range nums {
-		dic[value] = true
-	}
-	// for _, value := range nums {
-	//     if _, ok := dic[value -1]; !ok {
-	//         curNum := value
-	//         curCount := 1
-	//         for dic[curNum + 1] {
-	//             curCount++
-	//             curNum++
-	//         }
-	//         if curCount > ret {
-	//             ret = curCount
-	//         }
-	//     }
-	// }
-	for _, num := range nums {
-		if !dic[num-1] {
-			currentNum := num
-			curretnStreak := 1
-			for dic[currentNum+1] {
-				currentNum++
-				curretnStreak++
-			}
-			if curretnStreak > ret {
-				ret = curretnStreak
-			}
-		}
-	}
-	return ret
+	var s generics.MyString = "TestMyString"
+
+	generics.SayHi(s)
 }

@@ -1,23 +1,15 @@
-{{ template "common_template" . }}
-{{ template "content_template" . }}
-
-{{- define "common_template" }}
-  状态：{{ .Status }}
-  There are {{ len .Alerts }} alerts
-  There are {{ len .Alerts.Firing }} firing alerts
-  There are {{ len .Alerts.Resolved }} resolved alerts
-  组标签：{{ .GroupLabels }}
-  公共标签：{{ .CommonLabels }}
-  公共标注：{{ .CommonAnnotations }}
+{{ define "common_tmpl" }}
+    **告警状态**：{{ .Status }}
+    **告警总数**：{{ len .Alerts }}
+    **正在告警**：{{ len .Alerts.Firing }} 
+    **告警恢复**：{{ len .Alerts.Resolved }}
+    **组标签**：{{ .GroupLabels }}
+    **公共标签**：{{ .CommonLabels }}
+    **公共标注**：{{ .CommonAnnotations }}
+  {{ range .Alerts.Firing }}
+    **开始时间**：{{ .StartsAt.Format "2006-01-02 15:04:05 -0700"}}
+    **告警状态**：{{ .Status }}
+    **标签**：{{ .Labels.Remove  (stringSlice "alertname" "grafana_folder") }}
+    **标注**：{{ .Annotations }}
+  {{ end -}}
 {{ end -}}
-
-{{- define "content_template" }}
-{{ range .Alerts }}
-  开始时间：{{ .StartsAt.Format "2006-01-02 15:04:05 -0700"}}
-  状态：{{ .Status }}
-  标签：{{ .Labels.Remove  (stringSlice "alertname" "grafana_folder") }}
-  标注：{{ .Annotations }}
-  指标值：{{ .ValueString }}
-{{ end }}
-{{ end -}}
-

@@ -225,22 +225,41 @@ func TimeParse() {
 }
 
 func RangeTest() {
-	sliceTest := []int{9, 8, 7}
-	mapTest := map[int]int{1: 9, 2: 8, 3: 7}
+	// sliceTest := []int{9, 8, 7}
+	// mapTest := map[int]int{1: 9, 2: 8, 3: 7}
 
-	for idx := range sliceTest {
-		fmt.Print(idx)
+	// for idx := range sliceTest {
+	// 	fmt.Print(idx)
+	// }
+	// fmt.Println()
+	// for idx, value := range sliceTest {
+	// 	fmt.Print(" ", idx, " ", value)
+	// }
+	// fmt.Println()
+	// for key := range mapTest {
+	// 	print("key:", key)
+	// }
+	// fmt.Println()
+	// for key, value := range mapTest {
+	// 	fmt.Print(" key : ", key, " value: ", value)
+	// }
+	// fmt.Println()
+
+	stringAscii := "hello, world"
+	for idx, value := range stringAscii {
+		fmt.Printf("stringAscii by range %v, %c \n", idx, value)
 	}
-	fmt.Println()
-	for idx, value := range sliceTest {
-		fmt.Print(" ", idx, " ", value)
+	for i := 0; i < len(stringAscii); i++ {
+		fmt.Printf("stringAscii by index %v %c \n", i, stringAscii[i])
 	}
-	fmt.Println()
-	for key := range mapTest {
-		print("key:", key)
+
+	stringRune := "你好，世界"
+
+	for idx, value := range stringRune {
+		fmt.Printf("stringRune by Range %v %d \n", idx, value)
 	}
-	fmt.Println()
-	for key, value := range mapTest {
-		fmt.Print(" key : ", key, " value: ", value)
+
+	for i := 0; i < len(stringRune); i++ {
+		fmt.Printf("stringRune by index %v %c \n", i, stringRune[i])
 	}
 }

@@ -1,15 +1,189 @@
-{{ define "common_tmpl" }}
+{{ define "message_body" }}
     **告警状态**：{{ .Status }}
-    **告警总数**：{{ len .Alerts }}
+    **告警总数**：{{ len .Alerts.Firing }}
     **正在告警**：{{ len .Alerts.Firing }} 
     **告警恢复**：{{ len .Alerts.Resolved }}
-    **组标签**：{{ .GroupLabels }}
-    **公共标签**：{{ .CommonLabels }}
-    **公共标注**：{{ .CommonAnnotations }}
+    **分组标签**：
+      {{- range $key, $value := .GroupLabels }}
+        **{{ $key }}**: {{ $value }}
+      {{- end }}
+    **相同标签值**：
+    {{- range $key, $value := .CommonLabels }}
+      {{- if not (index $.GroupLabels $key)}}
+        **{{ $key }}**: {{ $value }}
+      {{- end }}
+    {{- end }}
+    **相同标注值**：
+      {{- range $key, $value := .CommonAnnotations }}
+        **{{ $key }}**: {{ $value }}
+      {{- end }}
   {{ range .Alerts.Firing }}
     **开始时间**：{{ .StartsAt.Format "2006-01-02 15:04:05 -0700"}}
     **告警状态**：{{ .Status }}
-    **标签**：{{ .Labels.Remove  (stringSlice "alertname" "grafana_folder") }}
-    **标注**：{{ .Annotations }}
-  {{ end -}}
-{{ end -}}
+    **独有标签值**：
+    {{- range $key, $value := .Labels }}
+      {{- if not (index $.CommonLabels $key) }}
+        **{{ $key }}**: {{ $value }}
+      {{- end }}
+    {{- end }}
+    **独有标注值**:
+    {{- range $key, $value := .Annotations }}
+      {{- if not (index $.CommonAnnotations $key) }}
+        **{{ $key }}**: {{ $value }}
+      {{- end }}
+    {{- end }}
+  {{ end }}
+{{- end }}
+
+
+{{- define "message_at" -}}
+  {{- if eq .GroupLabels.service "dsagent" -}}
+    <@capriwang> <@levinlin>
+  {{- else if eq .GroupLabels.service "tconnd_lobby" -}}
+    <@capriwang> <@ashtongao> <@sheehanma>
+  {{- else if eq .GroupLabels.service "lobbysvrd" -}}
+    <@capriwang> <@josiahlv>
+  {{- else if eq .GroupLabels.service "dscenter" -}}
+    <@capriwang> <@levinlin>
+  {{- else if eq .GroupLabels.service "dbsvrd" -}}
+    <@levinlin> <@josiahlv> <@austinebai>
+  {{- else if eq .GroupLabels.service "accountsvrd" -}}
+    <@josiahlv> <@xiaokaigao>
+  {{- else if eq .GroupLabels.service "vlog" -}}
+    <@paveelin> <@levinlin>
+  {{- else if eq .GroupLabels.service "gamefriend" -}}
+    <@austinebai> <@taylorzhong>
+  {{- else if eq .GroupLabels.service "deposit" -}}
+    <@capriwang> <@ashtongao>
+  {{- else if eq .GroupLabels.service "allocmgrsvrd" -}}
+    <@josiahlv> <@austinebai> <@ashtongao>
+  {{- else if eq .GroupLabels.service "room_match" -}}
+    <@josiahlv> <@austinebai> <@ashtongao>
+  {{- else if eq .GroupLabels.service "rank" -}}
+    <@josiahlv> <@sheehanma>
+  {{- else if eq .GroupLabels.service "timer" -}}
+    <@sheehanma> <@levinlin>
+  {{- else if eq .GroupLabels.service "game_statis" -}}
+    <@xiaokaigao> <@sheehanma>
+  {{- else if eq .GroupLabels.service "player_state" -}}
+    <@austinebai> <@levinlin>
+  {{- else if eq .GroupLabels.service "player_info" -}}
+    <@austinebai>
+  {{- else if eq .GroupLabels.service "chat" -}}
+    <@austinebai> <@ashtongao>
+  {{- else if eq .GroupLabels.service "mail" -}}
+    <@ashtongao> <@austinebai>
+  {{- else if eq .GroupLabels.service "room" -}}
+    <@josiahlv> <@austinebai> <@ashtongao>
+  {{- else if eq .GroupLabels.service "room_center" -}}
+    <@capriwang> <@josiahlv>
+  {{- else if eq .GroupLabels.service "team" -}}
+    <@austinebai> <@capriwang>
+  {{- else if eq .GroupLabels.service "store" -}}
+    <@austinebai> <@josiahlv>
+  {{- else if eq .GroupLabels.service "trace_cache" -}}
+    <@josiahlv>
+  {{- else if eq .GroupLabels.service "idipsvr" -}}
+    <@xiaokaigao> <@sheehanma>
+  {{- else if eq .GroupLabels.service "ranklist" -}}
+    <@josiahlv> <@sheehanma>
+  {{- else if eq .GroupLabels.service "platproxy" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "msdkproxy" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "game_record" -}}
+    <@xiaokaigao> <@sheehanma>
+  {{- else if eq .GroupLabels.service "lottery" -}}
+    <@ashtongao> <@josiahlv>
+  {{- else if eq .GroupLabels.service "gamefriendrec" -}}
+    <@austinebai> <@taylorzhong>
+  {{- else if eq .GroupLabels.service "playersearch" -}}
+    <@austinebai> <@taylorzhong>
+  {{- else if eq .GroupLabels.service "chatroom" -}}
+    <@austinebai> <@ashtongao>
+  {{- else if eq .GroupLabels.service "chatroommgr" -}}
+    <@austinebai> <@ashtongao>
+  {{- else if eq .GroupLabels.service "recruitcenter" -}}
+    <@austinebai> <@capriwang>
+  {{- else if eq .GroupLabels.service "ailabagent" -}}
+    <@paveelin> <@xiaokaigao>
+  {{- else if eq .GroupLabels.service "evaluate" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "dslauncher" -}}
+    <@paveelin> <@levinlin>
+  {{- else if eq .GroupLabels.service "activity" -}}
+    <@levinlin> <@sheehanma>
+  {{- else if eq .GroupLabels.service "data_agent" -}}
+    <@xiaokaigao> <@josiahlv>
+  {{- else if eq .GroupLabels.service "memosvr" -}}
+    <@sheehanma> <@austinebai>
+  {{- else if eq .GroupLabels.service "homepage" -}}
+    <@sheehanma> <@levinlin>
+  {{- else if eq .GroupLabels.service "pingtrack" -}}
+    <@levinlin> <@austinebai> <@ashtongao>
+  {{- else if eq .GroupLabels.service "perf_agent" -}}
+    <@xiaokaigao> <@sheehanma>
+  {{- else if eq .GroupLabels.service "guild" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "player_guild" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "dsping" -}}
+    <@levinlin> <@austinebai> <@ashtongao>
+  {{- else if eq .GroupLabels.service "guild_cache" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "online" -}}
+    <@sheehanma> <@josiahlv>
+  {{- else if eq .GroupLabels.service "abtest" -}}
+    <@josiahlv> <@sheehanma>
+  {{- else if eq .GroupLabels.service "battlepass" -}}
+    <@guolonglin> <@levinlin>
+  {{- else if eq .GroupLabels.service "checkin" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "ds_data_analysis" -}}
+    <@gevinzheng> <@sheehanma>
+  {{- else if eq .GroupLabels.service "botaccount" -}}
+    <@guolonglin> <@xiaokaigao>
+  {{- else if eq .GroupLabels.service "gm_agent" -}}
+    <@sheehanma> <@xiaokaigao>
+  {{- else if eq .GroupLabels.service "statis_cache" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "tconnd_gm" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "chathero" -}}
+    <@tyrionli> <@levinlin>
+  {{- else if eq .GroupLabels.service "moment" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "herofriend" -}}
+    <@austinebai> <@taylorzhong>
+  {{- else if eq .GroupLabels.service "maincity" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "payproxy" -}}
+    <@sheehanma> <@levinlin>
+  {{- else if eq .GroupLabels.service "subscription" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "article_center" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "pie_dsproxy" -}}
+    <@guolonglin> <@xiaokaigao>
+  {{- else if eq .GroupLabels.service "csntf_router" -}}
+    <@xiaokaigao> <@josiahlv>
+  {{- else if eq .GroupLabels.service "reconciliation" -}}
+    <@ashtongao> <@austinebai>
+  {{- else if eq .GroupLabels.service "avataragent" -}}
+    <@gevinzheng> <@xiaokaigao>
+  {{- else if eq .GroupLabels.service "dslagent" -}}
+    <@capriwang> <@xiaokaigao>
+  {{- else if eq .GroupLabels.service "gpasvr" -}}
+    <@capriwang> <@levinlin> <@ashtongao>
+  {{- else if eq .GroupLabels.service "tbus2_ns" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "tbus2_agent" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "pkgrecord" -}}
+    <@all>
+  {{- else if eq .GroupLabels.service "mqagent" -}}
+    <@all>
+  {{- else -}}
+    <@all>
+  {{- end -}}
+{{- end -}}

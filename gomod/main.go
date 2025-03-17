@@ -2,10 +2,10 @@ package main
 
 import (
 	_ "embed"
-	"gomod/mylib"
+	txttemplate "gomod/txt_template"
 )
 
 func main() {
 
-	mylib.RangeTest()
+	txttemplate.ConditionTest()
 }

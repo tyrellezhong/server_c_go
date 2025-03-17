@@ -8,6 +8,7 @@
 
 void TimeTest::ChronoTimeTest() {
     DebugBegin("ChronoTimeTest");
+    using namespace std::chrono;
     // 获取当前时间点
     auto now = std::chrono::system_clock::now();
 
@@ -34,7 +35,7 @@ void TimeTest::ChronoTimeTest() {
     auto nanoseconds = std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count() % 1000000000;
 
     // 打印当前时间戳（秒）
-    std::cout << "当前时间戳: " << seconds << " 秒" << std::endl;
+    std::cout << "当前时间戳: " << seconds << " 秒  " << "纳秒 " << std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count() << std::endl;
 
     // 打印格式化后的本地时间和纳秒
     std::cout << "格式化后的本地时间: " << buffer << "." << std::setw(9) << std::setfill('0') << nanoseconds << std::endl;
@@ -111,6 +112,13 @@ void TimeTest::ChronoTimeTest() {
     } else {
         std::cout << "现在时间不小于未来时间" << std::endl;
     }
+
+    auto time_now = std::chrono::time_point_cast<std::chrono::duration<int64_t, std::ratio<24 * 60 * 60, 1>>>(std::chrono::system_clock::now());
+
+    std::cout << "form epoch days: " << time_now.time_since_epoch().count() << std::endl;
+ 
+  
+  
 
 }
 

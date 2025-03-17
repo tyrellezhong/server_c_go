@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <iostream>
 #include <vector>
 #include "std_example.h"
 
@@ -19,22 +20,12 @@ using namespace std;
 
 
 
-
 int main(int argc, char **argv)
 {
+    
     LogInfo("begin new program : %s", argv[0]);
 
-    StdContainers containertest;
-    containertest.AllTest();
+    TimeTest test;
+    test.ChronoTimeTest();
 
-    TimeTest time_test;
-    time_test.ChronoTimeTest();
-    time_test.CTimeTest();
-
-    std::cout << "make_index_seq : ";
-    PrintN(make_index_seq<5>());
-
-    AllocatorTest allocatoer;
-    allocatoer.StdAllocatorTest();
-    allocatoer.SelfAllocatorTset();
 }

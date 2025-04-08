@@ -43,9 +43,13 @@ say_hello2()
 # 会 立即执行 decorator 函数（在模块导入/代码加载时就会执行）
 # 将被装饰的函数作为参数传递给装饰器
 # 用装饰器返回的结果 替换 原函数
+
 def decorator(func):
     print("装饰器执行了！")  # 会在 @ 时立即打印
     return func
 
+
+# 以下@ 等价于
+# test = decorator(test)  # 显式调用装饰器
 @decorator  # 这里会立即输出"装饰器执行了！"
 def test(): pass

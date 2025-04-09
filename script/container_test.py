@@ -151,6 +151,10 @@ def list_test():
     li.insert(0, [12, 13])
 
     li.pop()
+    for i in li:
+      print(i)
+    for i in range(0, 10):
+       print(i)
 
 def set_test():
     s = {1, 2, 3, 8, 5, 7, 0}

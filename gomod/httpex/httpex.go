@@ -158,7 +158,28 @@ func HttpSvr() {
 	// 设置路由和处理函数
 	http.HandleFunc("/redirect1", HandlerRedirect)
 	http.HandleFunc("/redirect2", HandlerRedirect2)
-	http.HandleFunc("/", EchoHandler2)
+	http.HandleFunc("/echo", EchoHandler2)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Root Handler: Path=%s\n", r.URL.Path)
+	})
+	// curl -v http://localhost:8080/path 会重定向，输出
+	// 	< HTTP/1.1 301 Moved Permanently
+	// < Content-Type: text/html; charset=utf-8
+	// < Location: /path/
+	// < Date: Thu, 17 Apr 2025 06:58:39 GMT
+	// < Content-Length: 41
+	// <
+	// <a href="/path/">Moved Permanently</a>.
+	// curl -v http://localhost:8080/path 会正常输出
+	// < HTTP/1.1 200 OK
+	// < Date: Thu, 17 Apr 2025 06:59:03 GMT
+	// < Content-Length: 29
+	// < Content-Type: text/plain; charset=utf-8
+	// <
+	// Path with slash: Path=/path/
+	http.HandleFunc("/path/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Path with slash: Path=%s\n", r.URL.Path)
+	})
 
 	// 启动 HTTP 服务器
 	fmt.Println("服务器正在运行，访问 http://localhost:8080")

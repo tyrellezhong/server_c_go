@@ -10,6 +10,7 @@ require (
 )
 
 require (
+	github.com/gorilla/websocket v1.5.3
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	go.uber.org/zap v1.27.0
 	gopkg.in/yaml.v2 v2.4.0

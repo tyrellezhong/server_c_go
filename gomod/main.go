@@ -3,10 +3,14 @@ package main
 import (
 	_ "embed"
 	"gomod/httpex"
+	"log"
 	// txttemplate "gomod/txt_template"
 )
 
 func main() {
+
+	// 设置日志格式，包含文件名和行号
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	// txttemplate.ConditionTest()
 	errChan := make(chan error, 1)
@@ -21,5 +25,9 @@ func main() {
 		println("err is nil")
 	}
 	println("err:", err)
-	httpex.HttpSvr()
+	go func() {
+		httpex.WebSocketProxy()
+	}()
+	httpex.WebSocketServer()
+	log.Println("Server ended")
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+</head>
+<body>
+    <h1>WebSocket Client</h1>
+    <button id="connect">Connect</button>
+    <button id="send">Send Message</button>
+    <button id="disconnect">Disconnect</button>
+    <div id="messages"></div>
+
+    <script>
+        let socket;
+
+        document.getElementById('connect').onclick = function() {
+            socket = new WebSocket('ws://9.135.33.61:8080/ws'); // 替换为你的 WebSocket 服务器地址
+
+            socket.onopen = function() {
+                console.log('WebSocket connection opened');
+                document.getElementById('messages').innerHTML += 'Connected to server<br>';
+            };
+
+            socket.onmessage = function(event) {
+                console.log('Message from server: ', event.data);
+                document.getElementById('messages').innerHTML += 'Message from server: ' + event.data + '<br>';
+            };
+
+            socket.onclose = function() {
+                console.log('WebSocket connection closed');
+                document.getElementById('messages').innerHTML += 'Disconnected from server<br>';
+            };
+
+            socket.onerror = function(error) {
+                console.error('WebSocket error: ', error);
+            };
+        };
+
+        document.getElementById('send').onclick = function() {
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                const message = 'Hello, server!';
+                socket.send(message);
+                console.log('Sent: ', message);
+            } else {
+                console.log('WebSocket is not open');
+            }
+        };
+
+        document.getElementById('disconnect').onclick = function() {
+            if (socket) {
+                socket.close();
+            }
+        };
+    </script>
+</body>
+</html>

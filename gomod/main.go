@@ -4,6 +4,9 @@ import (
 	_ "embed"
 	"gomod/httpex"
 	"log"
+
+	// _ "net/http/pprof" // 确保这里是匿名导入
+	"time"
 	// txttemplate "gomod/txt_template"
 )
 
@@ -25,9 +28,18 @@ func main() {
 		println("err is nil")
 	}
 	println("err:", err)
-	go func() {
-		httpex.WebSocketProxy()
-	}()
-	httpex.WebSocketServer()
+	// go func() {
+	// 	log.Println("listening on port 6060")
+	// 	log.Fatal(http.ListenAndServe(":6060", nil))
+	// }()
+	httpex.ProffServer()
+
+	count := 0
+	for {
+		log.Printf("time pass %d minutes", count)
+		time.Sleep(time.Second)
+		count++
+	}
+
 	log.Println("Server ended")
 }

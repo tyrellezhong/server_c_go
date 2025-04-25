@@ -159,3 +159,10 @@ func WebSocketServer() {
 	fmt.Println("WebSocket server is running on :8081")
 	log.Fatal(http.ListenAndServe(":8081", mux))
 }
+
+func WebSocketDaemon() {
+	go func() {
+		WebSocketProxy()
+	}()
+	WebSocketServer()
+}

@@ -1,0 +1,1 @@
+import{n as t}from"./index.91c1d8ee.js";import"./vendor.3a85f146.js";var e=function(){var t=this,e=t.$createElement;return(t._self._c||e)("div",[t._v("form")])};e._withStripped=!0;const r={};var n=t({},e,[],!1,(function(t){for(let e in r)this[e]=r[e]}),null,null,null).exports;export default n;

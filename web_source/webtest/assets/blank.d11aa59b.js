@@ -1,0 +1,1 @@
+import{n as e}from"./index.91c1d8ee.js";import"./vendor.3a85f146.js";var t=function(){var e=this.$createElement,t=this._self._c||e;return t("div",{staticClass:"tdesign-wrapper"},[t("router-view")],1)};t._withStripped=!0;const r={};var i=e({},t,[],!1,(function(e){for(let t in r)this[t]=r[t]}),"082ee776",null,null).exports;export default i;

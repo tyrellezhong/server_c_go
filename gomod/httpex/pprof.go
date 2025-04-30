@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func ProffServer() {
+func PprofServer() {
 	// 启动 pprof 路由
 	r := http.NewServeMux()
 	r.HandleFunc("/debug/pprof/", pprof.Index)

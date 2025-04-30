@@ -15,6 +15,7 @@ func main() {
 
 	// txttemplate.ConditionTest()
 
-	// httpex.ProffServer()
-	httpex.GinServer()
+	// httpex.PprofServer()
+	// httpex.GinServer()
+	httpex.FileServer()
 }

@@ -1,48 +1,33 @@
-package httpex
+package pprofshow
 
 import (
 	"fmt"
 	"io"
 	"log"
 	"net/http"
-	"net/http/pprof"
 	"os"
+	"os/exec"
 	"time"
 )
 
-func PprofServer() {
-	// 启动 pprof 路由
-	r := http.NewServeMux()
-	r.HandleFunc("/debug/pprof/", pprof.Index)
-	r.HandleFunc("/debug/pprof/cmdline", pprof.Cmdline)
-	r.HandleFunc("/debug/pprof/profile", pprof.Profile)
-	r.HandleFunc("/debug/pprof/symbol", pprof.Symbol)
-	r.HandleFunc("/debug/pprof/trace", pprof.Trace)
-	r.Handle("/debug/pprof/heap", pprof.Handler("heap"))
-	r.Handle("/debug/pprof/goroutine", pprof.Handler("goroutine"))
+// 采样表
+const (
+	TableProfile      = "profile"
+	TableMemory       = "memory"
+	TableBlock        = "block"
+	TableMutex        = "mutex"
+	TableGoroutine    = "goroutine"
+	TableThreadcreate = "threadcreate"
+	TableTrace        = "trace"
+	TableProfHistory  = "profhistory"
+)
 
-	// 启动 HTTP 服务器
-	addr := ":6060" // 你可以根据需要修改这个地址
-	fmt.Printf("Starting pprof server at http://%s\n", addr)
-	if err := http.ListenAndServe(addr, r); err != nil {
-		fmt.Printf("Error starting server: %v\n", err)
-	}
-
-}
-
-func AutoProfServer() {
-	go func() {
-		log.Println("listening on port 6060")
-		log.Fatal(http.ListenAndServe(":6060", nil))
-	}()
-
-	count := 0
-	for {
-		log.Printf("time pass %d minutes", count)
-		time.Sleep(time.Second)
-		count++
-	}
-
+type ProfShowInfo struct {
+	ShowType   string
+	Cmd        *exec.Cmd
+	ListenAddr string
+	StartTime  time.Time
+	FileName   string
 }
 
 // HttpGetToFile http请求url地址（入参），并将返回结果写入文件outputfile（入参）
@@ -82,4 +67,28 @@ func HttpGetToFile(url string, outputfile string) {
 	}
 }
 
+// CheckShutdown
+func CheckShowShutdown() {
+	ticker := time.NewTicker(time.Second * 60)
+	if ticker != nil {
+		go func() {
+			for range ticker.C {
+				log.Println("helloworld")
+			}
+		}()
+	}
+}
+
 // CreatePprofServer
+func CreateShowServer(info *ProfShowInfo) {
+	// 定义要执行的命令和参数
+	cmd := fmt.Sprintf("go tool pprof -http=%s %s", info.ListenAddr, info.FileName)
+	info.Cmd = exec.Command("sh", "-c", cmd)
+
+	msg, err := info.Cmd.Output()
+	if err != nil {
+		log.Printf("Error running command: %v", err)
+		return
+	}
+	log.Printf("Command output: %s", msg)
+}

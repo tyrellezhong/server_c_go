@@ -29,6 +29,7 @@ message(STATUS "protobuf package: ${Protobuf_LIBRARIES}")
 
 # 向工程添加多个特定的头文件搜索路径
 include_directories(${CMAKE_SOURCE_DIR}/includes)
+include_directories(${CMAKE_SOURCE_DIR}/proto_out)
 include_directories(${CMAKE_SOURCE_DIR}/protobuf-21.9/include) # proto 编译不过时可以注释掉
 
 file(GLOB_RECURSE srcs
@@ -36,6 +37,7 @@ file(GLOB_RECURSE srcs
         ./src/*.cpp
         ./src/*.h
         ./proto_out/*.cc # proto 编译不过时可以注释掉
+        ./proto_out/*.cpp # proto 编译不过时可以注释掉
         )
 
 # 编译SRC变量所代表的源代码文件，生成main可执行文件

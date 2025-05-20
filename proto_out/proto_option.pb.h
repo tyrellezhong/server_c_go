@@ -30,6 +30,7 @@
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/unknown_field_set.h>
+#include <google/protobuf/descriptor.pb.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 #define PROTOBUF_INTERNAL_EXPORT_proto_5foption_2eproto
@@ -45,16 +46,184 @@ struct TableStruct_proto_5foption_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_proto_5foption_2eproto;
 namespace msg {
+class MyMessage;
+struct MyMessageDefaultTypeInternal;
+extern MyMessageDefaultTypeInternal _MyMessage_default_instance_;
 class Person;
 struct PersonDefaultTypeInternal;
 extern PersonDefaultTypeInternal _Person_default_instance_;
 }  // namespace msg
 PROTOBUF_NAMESPACE_OPEN
+template<> ::msg::MyMessage* Arena::CreateMaybeMessage<::msg::MyMessage>(Arena*);
 template<> ::msg::Person* Arena::CreateMaybeMessage<::msg::Person>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace msg {
 
 // ===================================================================
+
+class MyMessage final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:msg.MyMessage) */ {
+ public:
+  inline MyMessage() : MyMessage(nullptr) {}
+  ~MyMessage() override;
+  explicit PROTOBUF_CONSTEXPR MyMessage(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  MyMessage(const MyMessage& from);
+  MyMessage(MyMessage&& from) noexcept
+    : MyMessage() {
+    *this = ::std::move(from);
+  }
+
+  inline MyMessage& operator=(const MyMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MyMessage& operator=(MyMessage&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const MyMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const MyMessage* internal_default_instance() {
+    return reinterpret_cast<const MyMessage*>(
+               &_MyMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  friend void swap(MyMessage& a, MyMessage& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MyMessage* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(MyMessage* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  MyMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<MyMessage>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const MyMessage& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const MyMessage& from) {
+    MyMessage::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MyMessage* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "msg.MyMessage";
+  }
+  protected:
+  explicit MyMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kNameFieldNumber = 1,
+    kAgeFieldNumber = 2,
+  };
+  // string name = 1 [(.msg.my_option) = "This is a custom option"];
+  void clear_name();
+  const std::string& name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_name();
+  PROTOBUF_NODISCARD std::string* release_name();
+  void set_allocated_name(std::string* name);
+  private:
+  const std::string& _internal_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
+  public:
+
+  // int32 age = 2 [(.msg.my_option) = "Age of the person"];
+  void clear_age();
+  int32_t age() const;
+  void set_age(int32_t value);
+  private:
+  int32_t _internal_age() const;
+  void _internal_set_age(int32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:msg.MyMessage)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+    int32_t age_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_proto_5foption_2eproto;
+};
+// -------------------------------------------------------------------
 
 class Person final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:msg.Person) */ {
@@ -104,7 +273,7 @@ class Person final :
                &_Person_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    1;
 
   friend void swap(Person& a, Person& b) {
     a.Swap(&b);
@@ -220,6 +389,10 @@ class Person final :
 };
 // ===================================================================
 
+static const int kMyOptionFieldNumber = 50001;
+extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::PROTOBUF_NAMESPACE_ID::FieldOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
+  my_option;
 
 // ===================================================================
 
@@ -227,6 +400,80 @@ class Person final :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// MyMessage
+
+// string name = 1 [(.msg.my_option) = "This is a custom option"];
+inline void MyMessage::clear_name() {
+  _impl_.name_.ClearToEmpty();
+}
+inline const std::string& MyMessage::name() const {
+  // @@protoc_insertion_point(field_get:msg.MyMessage.name)
+  return _internal_name();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void MyMessage::set_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:msg.MyMessage.name)
+}
+inline std::string* MyMessage::mutable_name() {
+  std::string* _s = _internal_mutable_name();
+  // @@protoc_insertion_point(field_mutable:msg.MyMessage.name)
+  return _s;
+}
+inline const std::string& MyMessage::_internal_name() const {
+  return _impl_.name_.Get();
+}
+inline void MyMessage::_internal_set_name(const std::string& value) {
+  
+  _impl_.name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* MyMessage::_internal_mutable_name() {
+  
+  return _impl_.name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* MyMessage::release_name() {
+  // @@protoc_insertion_point(field_release:msg.MyMessage.name)
+  return _impl_.name_.Release();
+}
+inline void MyMessage::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:msg.MyMessage.name)
+}
+
+// int32 age = 2 [(.msg.my_option) = "Age of the person"];
+inline void MyMessage::clear_age() {
+  _impl_.age_ = 0;
+}
+inline int32_t MyMessage::_internal_age() const {
+  return _impl_.age_;
+}
+inline int32_t MyMessage::age() const {
+  // @@protoc_insertion_point(field_get:msg.MyMessage.age)
+  return _internal_age();
+}
+inline void MyMessage::_internal_set_age(int32_t value) {
+  
+  _impl_.age_ = value;
+}
+inline void MyMessage::set_age(int32_t value) {
+  _internal_set_age(value);
+  // @@protoc_insertion_point(field_set:msg.MyMessage.age)
+}
+
+// -------------------------------------------------------------------
+
 // Person
 
 // string name = 1;
@@ -302,6 +549,8 @@ inline void Person::set_age(int32_t value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 

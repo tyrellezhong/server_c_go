@@ -15,6 +15,7 @@
 #include <iostream>
 #include <vector>
 #include "std_example.h"
+#include "proto_test.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ int main(int argc, char **argv)
     std::unordered_map<int, int> map;
     auto erase_num = map.erase(1);
     LogInfo("format, ... %zu", erase_num);
+    TestProtoOption();
     for (;;){
         // 睡眠10秒
         sleep(10);

@@ -21,6 +21,20 @@ namespace _pb = ::PROTOBUF_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
 namespace msg {
+PROTOBUF_CONSTEXPR MyMessage::MyMessage(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.age_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct MyMessageDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MyMessageDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MyMessageDefaultTypeInternal() {}
+  union {
+    MyMessage _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MyMessageDefaultTypeInternal _MyMessage_default_instance_;
 PROTOBUF_CONSTEXPR Person::Person(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -36,11 +50,19 @@ struct PersonDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PersonDefaultTypeInternal _Person_default_instance_;
 }  // namespace msg
-static ::_pb::Metadata file_level_metadata_proto_5foption_2eproto[1];
+static ::_pb::Metadata file_level_metadata_proto_5foption_2eproto[2];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_proto_5foption_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_proto_5foption_2eproto = nullptr;
 
 const uint32_t TableStruct_proto_5foption_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::msg::MyMessage, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::msg::MyMessage, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::msg::MyMessage, _impl_.age_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::msg::Person, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -51,22 +73,32 @@ const uint32_t TableStruct_proto_5foption_2eproto::offsets[] PROTOBUF_SECTION_VA
   PROTOBUF_FIELD_OFFSET(::msg::Person, _impl_.age_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::msg::Person)},
+  { 0, -1, -1, sizeof(::msg::MyMessage)},
+  { 8, -1, -1, sizeof(::msg::Person)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
+  &::msg::_MyMessage_default_instance_._instance,
   &::msg::_Person_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_proto_5foption_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\022proto_option.proto\022\003msg\"#\n\006Person\022\014\n\004n"
-  "ame\030\001 \001(\t\022\013\n\003age\030\002 \001(\005b\006proto3"
+  "\n\022proto_option.proto\022\003msg\032 google/protob"
+  "uf/descriptor.proto\"Z\n\tMyMessage\022)\n\004name"
+  "\030\001 \001(\tB\033\212\265\030\027This is a custom option\022\"\n\003a"
+  "ge\030\002 \001(\005B\025\212\265\030\021Age of the person\"#\n\006Perso"
+  "n\022\014\n\004name\030\001 \001(\t\022\013\n\003age\030\002 \001(\005:2\n\tmy_optio"
+  "n\022\035.google.protobuf.FieldOptions\030\321\206\003 \001(\t"
+  "b\006proto3"
   ;
+static const ::_pbi::DescriptorTable* const descriptor_table_proto_5foption_2eproto_deps[1] = {
+  &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
+};
 static ::_pbi::once_flag descriptor_table_proto_5foption_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_proto_5foption_2eproto = {
-    false, false, 70, descriptor_table_protodef_proto_5foption_2eproto,
+    false, false, 248, descriptor_table_protodef_proto_5foption_2eproto,
     "proto_option.proto",
-    &descriptor_table_proto_5foption_2eproto_once, nullptr, 0, 1,
+    &descriptor_table_proto_5foption_2eproto_once, descriptor_table_proto_5foption_2eproto_deps, 1, 2,
     schemas, file_default_instances, TableStruct_proto_5foption_2eproto::offsets,
     file_level_metadata_proto_5foption_2eproto, file_level_enum_descriptors_proto_5foption_2eproto,
     file_level_service_descriptors_proto_5foption_2eproto,
@@ -78,6 +110,236 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_proto_5f
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_proto_5foption_2eproto(&descriptor_table_proto_5foption_2eproto);
 namespace msg {
+
+// ===================================================================
+
+class MyMessage::_Internal {
+ public:
+};
+
+MyMessage::MyMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:msg.MyMessage)
+}
+MyMessage::MyMessage(const MyMessage& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  MyMessage* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.name_){}
+    , decltype(_impl_.age_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_name().empty()) {
+    _this->_impl_.name_.Set(from._internal_name(), 
+      _this->GetArenaForAllocation());
+  }
+  _this->_impl_.age_ = from._impl_.age_;
+  // @@protoc_insertion_point(copy_constructor:msg.MyMessage)
+}
+
+inline void MyMessage::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.name_){}
+    , decltype(_impl_.age_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+MyMessage::~MyMessage() {
+  // @@protoc_insertion_point(destructor:msg.MyMessage)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void MyMessage::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.name_.Destroy();
+}
+
+void MyMessage::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void MyMessage::Clear() {
+// @@protoc_insertion_point(message_clear_start:msg.MyMessage)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.name_.ClearToEmpty();
+  _impl_.age_ = 0;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* MyMessage::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string name = 1 [(.msg.my_option) = "This is a custom option"];
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "msg.MyMessage.name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 age = 2 [(.msg.my_option) = "Age of the person"];
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.age_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* MyMessage::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:msg.MyMessage)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1 [(.msg.my_option) = "This is a custom option"];
+  if (!this->_internal_name().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "msg.MyMessage.name");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_name(), target);
+  }
+
+  // int32 age = 2 [(.msg.my_option) = "Age of the person"];
+  if (this->_internal_age() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_age(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:msg.MyMessage)
+  return target;
+}
+
+size_t MyMessage::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:msg.MyMessage)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string name = 1 [(.msg.my_option) = "This is a custom option"];
+  if (!this->_internal_name().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_name());
+  }
+
+  // int32 age = 2 [(.msg.my_option) = "Age of the person"];
+  if (this->_internal_age() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_age());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData MyMessage::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    MyMessage::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MyMessage::GetClassData() const { return &_class_data_; }
+
+
+void MyMessage::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<MyMessage*>(&to_msg);
+  auto& from = static_cast<const MyMessage&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:msg.MyMessage)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_name().empty()) {
+    _this->_internal_set_name(from._internal_name());
+  }
+  if (from._internal_age() != 0) {
+    _this->_internal_set_age(from._internal_age());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void MyMessage::CopyFrom(const MyMessage& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:msg.MyMessage)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MyMessage::IsInitialized() const {
+  return true;
+}
+
+void MyMessage::InternalSwap(MyMessage* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.name_, lhs_arena,
+      &other->_impl_.name_, rhs_arena
+  );
+  swap(_impl_.age_, other->_impl_.age_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata MyMessage::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_proto_5foption_2eproto_getter, &descriptor_table_proto_5foption_2eproto_once,
+      file_level_metadata_proto_5foption_2eproto[0]);
+}
 
 // ===================================================================
 
@@ -306,12 +568,20 @@ void Person::InternalSwap(Person* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata Person::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_proto_5foption_2eproto_getter, &descriptor_table_proto_5foption_2eproto_once,
-      file_level_metadata_proto_5foption_2eproto[0]);
+      file_level_metadata_proto_5foption_2eproto[1]);
 }
+const std::string my_option_default("");
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::PROTOBUF_NAMESPACE_ID::FieldOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false>
+  my_option(kMyOptionFieldNumber, my_option_default, nullptr);
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace msg
 PROTOBUF_NAMESPACE_OPEN
+template<> PROTOBUF_NOINLINE ::msg::MyMessage*
+Arena::CreateMaybeMessage< ::msg::MyMessage >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::msg::MyMessage >(arena);
+}
 template<> PROTOBUF_NOINLINE ::msg::Person*
 Arena::CreateMaybeMessage< ::msg::Person >(Arena* arena) {
   return Arena::CreateMessageInternal< ::msg::Person >(arena);

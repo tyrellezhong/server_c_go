@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package msg;
+
+// 定义自定义选项
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+    string my_option = 50001; // 自定义选项的字段编号
+}
+
+// 定义消息
+message MyMessage {
+    string name = 1 [(my_option) = "This is a custom option"];
+    int32 age = 2 [(my_option) = "Age of the person"];
+}

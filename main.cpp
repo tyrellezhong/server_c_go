@@ -30,5 +30,9 @@ int main(int argc, char **argv)
     std::unordered_map<int, int> map;
     auto erase_num = map.erase(1);
     LogInfo("format, ... %zu", erase_num);
+    for (;;){
+        // 睡眠10秒
+        sleep(10);
+    }
 
 }

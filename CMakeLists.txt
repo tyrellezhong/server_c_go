@@ -10,7 +10,7 @@ set(app myexe)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # 在CMAKE_CXX_FLAGS编译选项后追加-std=c++11等
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -g -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -g -Wall -O0")
 
 set(CMAKE_CXX_STANDARD 17)
 

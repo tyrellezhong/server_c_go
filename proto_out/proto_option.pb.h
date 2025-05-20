@@ -29,6 +29,9 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/map.h>  // IWYU pragma: export
+#include <google/protobuf/map_entry.h>
+#include <google/protobuf/map_field_inl.h>
 #include <google/protobuf/unknown_field_set.h>
 #include <google/protobuf/descriptor.pb.h>
 // @@protoc_insertion_point(includes)
@@ -52,10 +55,14 @@ extern MyMessageDefaultTypeInternal _MyMessage_default_instance_;
 class Person;
 struct PersonDefaultTypeInternal;
 extern PersonDefaultTypeInternal _Person_default_instance_;
+class Person_MapEntry_DoNotUse;
+struct Person_MapEntry_DoNotUseDefaultTypeInternal;
+extern Person_MapEntry_DoNotUseDefaultTypeInternal _Person_MapEntry_DoNotUse_default_instance_;
 }  // namespace msg
 PROTOBUF_NAMESPACE_OPEN
 template<> ::msg::MyMessage* Arena::CreateMaybeMessage<::msg::MyMessage>(Arena*);
 template<> ::msg::Person* Arena::CreateMaybeMessage<::msg::Person>(Arena*);
+template<> ::msg::Person_MapEntry_DoNotUse* Arena::CreateMaybeMessage<::msg::Person_MapEntry_DoNotUse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace msg {
 
@@ -183,6 +190,7 @@ class MyMessage final :
 
   enum : int {
     kNameFieldNumber = 1,
+    kPersonFieldNumber = 3,
     kAgeFieldNumber = 2,
   };
   // string name = 1 [(.msg.my_option) = "This is a custom option"];
@@ -198,6 +206,24 @@ class MyMessage final :
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
   std::string* _internal_mutable_name();
   public:
+
+  // .msg.Person person = 3 [(.msg.my_option) = "Person info"];
+  bool has_person() const;
+  private:
+  bool _internal_has_person() const;
+  public:
+  void clear_person();
+  const ::msg::Person& person() const;
+  PROTOBUF_NODISCARD ::msg::Person* release_person();
+  ::msg::Person* mutable_person();
+  void set_allocated_person(::msg::Person* person);
+  private:
+  const ::msg::Person& _internal_person() const;
+  ::msg::Person* _internal_mutable_person();
+  public:
+  void unsafe_arena_set_allocated_person(
+      ::msg::Person* person);
+  ::msg::Person* unsafe_arena_release_person();
 
   // int32 age = 2 [(.msg.my_option) = "Age of the person"];
   void clear_age();
@@ -217,12 +243,37 @@ class MyMessage final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+    ::msg::Person* person_;
     int32_t age_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_proto_5foption_2eproto;
 };
+// -------------------------------------------------------------------
+
+class Person_MapEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<Person_MapEntry_DoNotUse, 
+    int32_t, int32_t,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32> {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<Person_MapEntry_DoNotUse, 
+    int32_t, int32_t,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32> SuperType;
+  Person_MapEntry_DoNotUse();
+  explicit PROTOBUF_CONSTEXPR Person_MapEntry_DoNotUse(
+      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit Person_MapEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void MergeFrom(const Person_MapEntry_DoNotUse& other);
+  static const Person_MapEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Person_MapEntry_DoNotUse*>(&_Person_MapEntry_DoNotUse_default_instance_); }
+  static bool ValidateKey(void*) { return true; }
+  static bool ValidateValue(void*) { return true; }
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  friend struct ::TableStruct_proto_5foption_2eproto;
+};
+
 // -------------------------------------------------------------------
 
 class Person final :
@@ -273,7 +324,7 @@ class Person final :
                &_Person_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   friend void swap(Person& a, Person& b) {
     a.Swap(&b);
@@ -334,6 +385,8 @@ class Person final :
   protected:
   explicit Person(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
   public:
 
   static const ClassData _class_data_;
@@ -343,12 +396,31 @@ class Person final :
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
 
   enum : int {
+    kMapFieldNumber = 3,
     kNameFieldNumber = 1,
     kAgeFieldNumber = 2,
   };
+  // map<int32, int32> map = 3;
+  int map_size() const;
+  private:
+  int _internal_map_size() const;
+  public:
+  void clear_map();
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Map< int32_t, int32_t >&
+      _internal_map() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< int32_t, int32_t >*
+      _internal_mutable_map();
+  public:
+  const ::PROTOBUF_NAMESPACE_ID::Map< int32_t, int32_t >&
+      map() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< int32_t, int32_t >*
+      mutable_map();
+
   // string name = 1;
   void clear_name();
   const std::string& name() const;
@@ -380,6 +452,11 @@ class Person final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::MapField<
+        Person_MapEntry_DoNotUse,
+        int32_t, int32_t,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32> map_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
     int32_t age_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -472,6 +549,98 @@ inline void MyMessage::set_age(int32_t value) {
   // @@protoc_insertion_point(field_set:msg.MyMessage.age)
 }
 
+// .msg.Person person = 3 [(.msg.my_option) = "Person info"];
+inline bool MyMessage::_internal_has_person() const {
+  return this != internal_default_instance() && _impl_.person_ != nullptr;
+}
+inline bool MyMessage::has_person() const {
+  return _internal_has_person();
+}
+inline void MyMessage::clear_person() {
+  if (GetArenaForAllocation() == nullptr && _impl_.person_ != nullptr) {
+    delete _impl_.person_;
+  }
+  _impl_.person_ = nullptr;
+}
+inline const ::msg::Person& MyMessage::_internal_person() const {
+  const ::msg::Person* p = _impl_.person_;
+  return p != nullptr ? *p : reinterpret_cast<const ::msg::Person&>(
+      ::msg::_Person_default_instance_);
+}
+inline const ::msg::Person& MyMessage::person() const {
+  // @@protoc_insertion_point(field_get:msg.MyMessage.person)
+  return _internal_person();
+}
+inline void MyMessage::unsafe_arena_set_allocated_person(
+    ::msg::Person* person) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.person_);
+  }
+  _impl_.person_ = person;
+  if (person) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:msg.MyMessage.person)
+}
+inline ::msg::Person* MyMessage::release_person() {
+  
+  ::msg::Person* temp = _impl_.person_;
+  _impl_.person_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::msg::Person* MyMessage::unsafe_arena_release_person() {
+  // @@protoc_insertion_point(field_release:msg.MyMessage.person)
+  
+  ::msg::Person* temp = _impl_.person_;
+  _impl_.person_ = nullptr;
+  return temp;
+}
+inline ::msg::Person* MyMessage::_internal_mutable_person() {
+  
+  if (_impl_.person_ == nullptr) {
+    auto* p = CreateMaybeMessage<::msg::Person>(GetArenaForAllocation());
+    _impl_.person_ = p;
+  }
+  return _impl_.person_;
+}
+inline ::msg::Person* MyMessage::mutable_person() {
+  ::msg::Person* _msg = _internal_mutable_person();
+  // @@protoc_insertion_point(field_mutable:msg.MyMessage.person)
+  return _msg;
+}
+inline void MyMessage::set_allocated_person(::msg::Person* person) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.person_;
+  }
+  if (person) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(person);
+    if (message_arena != submessage_arena) {
+      person = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, person, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.person_ = person;
+  // @@protoc_insertion_point(field_set_allocated:msg.MyMessage.person)
+}
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // Person
@@ -546,9 +715,40 @@ inline void Person::set_age(int32_t value) {
   // @@protoc_insertion_point(field_set:msg.Person.age)
 }
 
+// map<int32, int32> map = 3;
+inline int Person::_internal_map_size() const {
+  return _impl_.map_.size();
+}
+inline int Person::map_size() const {
+  return _internal_map_size();
+}
+inline void Person::clear_map() {
+  _impl_.map_.Clear();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< int32_t, int32_t >&
+Person::_internal_map() const {
+  return _impl_.map_.GetMap();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< int32_t, int32_t >&
+Person::map() const {
+  // @@protoc_insertion_point(field_map:msg.Person.map)
+  return _internal_map();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< int32_t, int32_t >*
+Person::_internal_mutable_map() {
+  return _impl_.map_.MutableMap();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< int32_t, int32_t >*
+Person::mutable_map() {
+  // @@protoc_insertion_point(field_mutable_map:msg.Person.map)
+  return _internal_mutable_map();
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

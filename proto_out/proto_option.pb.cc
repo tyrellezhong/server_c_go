@@ -24,6 +24,7 @@ namespace msg {
 PROTOBUF_CONSTEXPR MyMessage::MyMessage(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.person_)*/nullptr
   , /*decltype(_impl_.age_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct MyMessageDefaultTypeInternal {
@@ -35,9 +36,21 @@ struct MyMessageDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MyMessageDefaultTypeInternal _MyMessage_default_instance_;
+PROTOBUF_CONSTEXPR Person_MapEntry_DoNotUse::Person_MapEntry_DoNotUse(
+    ::_pbi::ConstantInitialized) {}
+struct Person_MapEntry_DoNotUseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Person_MapEntry_DoNotUseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Person_MapEntry_DoNotUseDefaultTypeInternal() {}
+  union {
+    Person_MapEntry_DoNotUse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Person_MapEntry_DoNotUseDefaultTypeInternal _Person_MapEntry_DoNotUse_default_instance_;
 PROTOBUF_CONSTEXPR Person::Person(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.map_)*/{::_pbi::ConstantInitialized()}
+  , /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.age_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct PersonDefaultTypeInternal {
@@ -50,7 +63,7 @@ struct PersonDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PersonDefaultTypeInternal _Person_default_instance_;
 }  // namespace msg
-static ::_pb::Metadata file_level_metadata_proto_5foption_2eproto[2];
+static ::_pb::Metadata file_level_metadata_proto_5foption_2eproto[3];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_proto_5foption_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_proto_5foption_2eproto = nullptr;
 
@@ -63,6 +76,17 @@ const uint32_t TableStruct_proto_5foption_2eproto::offsets[] PROTOBUF_SECTION_VA
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::msg::MyMessage, _impl_.name_),
   PROTOBUF_FIELD_OFFSET(::msg::MyMessage, _impl_.age_),
+  PROTOBUF_FIELD_OFFSET(::msg::MyMessage, _impl_.person_),
+  PROTOBUF_FIELD_OFFSET(::msg::Person_MapEntry_DoNotUse, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::msg::Person_MapEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::msg::Person_MapEntry_DoNotUse, key_),
+  PROTOBUF_FIELD_OFFSET(::msg::Person_MapEntry_DoNotUse, value_),
+  0,
+  1,
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::msg::Person, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -71,34 +95,40 @@ const uint32_t TableStruct_proto_5foption_2eproto::offsets[] PROTOBUF_SECTION_VA
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::msg::Person, _impl_.name_),
   PROTOBUF_FIELD_OFFSET(::msg::Person, _impl_.age_),
+  PROTOBUF_FIELD_OFFSET(::msg::Person, _impl_.map_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::msg::MyMessage)},
-  { 8, -1, -1, sizeof(::msg::Person)},
+  { 9, 17, -1, sizeof(::msg::Person_MapEntry_DoNotUse)},
+  { 19, -1, -1, sizeof(::msg::Person)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::msg::_MyMessage_default_instance_._instance,
+  &::msg::_Person_MapEntry_DoNotUse_default_instance_._instance,
   &::msg::_Person_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_proto_5foption_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\022proto_option.proto\022\003msg\032 google/protob"
-  "uf/descriptor.proto\"Z\n\tMyMessage\022)\n\004name"
-  "\030\001 \001(\tB\033\212\265\030\027This is a custom option\022\"\n\003a"
-  "ge\030\002 \001(\005B\025\212\265\030\021Age of the person\"#\n\006Perso"
-  "n\022\014\n\004name\030\001 \001(\t\022\013\n\003age\030\002 \001(\005:2\n\tmy_optio"
-  "n\022\035.google.protobuf.FieldOptions\030\321\206\003 \001(\t"
-  "b\006proto3"
+  "uf/descriptor.proto\"\210\001\n\tMyMessage\022)\n\004nam"
+  "e\030\001 \001(\tB\033\212\265\030\027This is a custom option\022\"\n\003"
+  "age\030\002 \001(\005B\025\212\265\030\021Age of the person\022,\n\006pers"
+  "on\030\003 \001(\0132\013.msg.PersonB\017\212\265\030\013Person info\"r"
+  "\n\006Person\022\014\n\004name\030\001 \001(\t\022\013\n\003age\030\002 \001(\005\022!\n\003m"
+  "ap\030\003 \003(\0132\024.msg.Person.MapEntry\032*\n\010MapEnt"
+  "ry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001:2\n\tmy"
+  "_option\022\035.google.protobuf.FieldOptions\030\321"
+  "\206\003 \001(\tb\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_proto_5foption_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_proto_5foption_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_proto_5foption_2eproto = {
-    false, false, 248, descriptor_table_protodef_proto_5foption_2eproto,
+    false, false, 374, descriptor_table_protodef_proto_5foption_2eproto,
     "proto_option.proto",
-    &descriptor_table_proto_5foption_2eproto_once, descriptor_table_proto_5foption_2eproto_deps, 1, 2,
+    &descriptor_table_proto_5foption_2eproto_once, descriptor_table_proto_5foption_2eproto_deps, 1, 3,
     schemas, file_default_instances, TableStruct_proto_5foption_2eproto::offsets,
     file_level_metadata_proto_5foption_2eproto, file_level_enum_descriptors_proto_5foption_2eproto,
     file_level_service_descriptors_proto_5foption_2eproto,
@@ -115,8 +145,13 @@ namespace msg {
 
 class MyMessage::_Internal {
  public:
+  static const ::msg::Person& person(const MyMessage* msg);
 };
 
+const ::msg::Person&
+MyMessage::_Internal::person(const MyMessage* msg) {
+  return *msg->_impl_.person_;
+}
 MyMessage::MyMessage(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -128,6 +163,7 @@ MyMessage::MyMessage(const MyMessage& from)
   MyMessage* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.person_){nullptr}
     , decltype(_impl_.age_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -140,6 +176,9 @@ MyMessage::MyMessage(const MyMessage& from)
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
+  if (from._internal_has_person()) {
+    _this->_impl_.person_ = new ::msg::Person(*from._impl_.person_);
+  }
   _this->_impl_.age_ = from._impl_.age_;
   // @@protoc_insertion_point(copy_constructor:msg.MyMessage)
 }
@@ -150,6 +189,7 @@ inline void MyMessage::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.person_){nullptr}
     , decltype(_impl_.age_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -171,6 +211,7 @@ MyMessage::~MyMessage() {
 inline void MyMessage::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.name_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.person_;
 }
 
 void MyMessage::SetCachedSize(int size) const {
@@ -184,6 +225,10 @@ void MyMessage::Clear() {
   (void) cached_has_bits;
 
   _impl_.name_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.person_ != nullptr) {
+    delete _impl_.person_;
+  }
+  _impl_.person_ = nullptr;
   _impl_.age_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -208,6 +253,14 @@ const char* MyMessage::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
           _impl_.age_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .msg.Person person = 3 [(.msg.my_option) = "Person info"];
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          ptr = ctx->ParseMessage(_internal_mutable_person(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -257,6 +310,13 @@ uint8_t* MyMessage::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_age(), target);
   }
 
+  // .msg.Person person = 3 [(.msg.my_option) = "Person info"];
+  if (this->_internal_has_person()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(3, _Internal::person(this),
+        _Internal::person(this).GetCachedSize(), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -278,6 +338,13 @@ size_t MyMessage::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
+  }
+
+  // .msg.Person person = 3 [(.msg.my_option) = "Person info"];
+  if (this->_internal_has_person()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.person_);
   }
 
   // int32 age = 2 [(.msg.my_option) = "Age of the person"];
@@ -306,6 +373,10 @@ void MyMessage::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROT
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
   }
+  if (from._internal_has_person()) {
+    _this->_internal_mutable_person()->::msg::Person::MergeFrom(
+        from._internal_person());
+  }
   if (from._internal_age() != 0) {
     _this->_internal_set_age(from._internal_age());
   }
@@ -332,13 +403,32 @@ void MyMessage::InternalSwap(MyMessage* other) {
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
   );
-  swap(_impl_.age_, other->_impl_.age_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(MyMessage, _impl_.age_)
+      + sizeof(MyMessage::_impl_.age_)
+      - PROTOBUF_FIELD_OFFSET(MyMessage, _impl_.person_)>(
+          reinterpret_cast<char*>(&_impl_.person_),
+          reinterpret_cast<char*>(&other->_impl_.person_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata MyMessage::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_proto_5foption_2eproto_getter, &descriptor_table_proto_5foption_2eproto_once,
       file_level_metadata_proto_5foption_2eproto[0]);
+}
+
+// ===================================================================
+
+Person_MapEntry_DoNotUse::Person_MapEntry_DoNotUse() {}
+Person_MapEntry_DoNotUse::Person_MapEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+    : SuperType(arena) {}
+void Person_MapEntry_DoNotUse::MergeFrom(const Person_MapEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::PROTOBUF_NAMESPACE_ID::Metadata Person_MapEntry_DoNotUse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_proto_5foption_2eproto_getter, &descriptor_table_proto_5foption_2eproto_once,
+      file_level_metadata_proto_5foption_2eproto[1]);
 }
 
 // ===================================================================
@@ -351,17 +441,22 @@ Person::Person(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
+  if (arena != nullptr && !is_message_owned) {
+    arena->OwnCustomDestructor(this, &Person::ArenaDtor);
+  }
   // @@protoc_insertion_point(arena_constructor:msg.Person)
 }
 Person::Person(const Person& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   Person* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      /*decltype(_impl_.map_)*/{}
+    , decltype(_impl_.name_){}
     , decltype(_impl_.age_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_impl_.map_.MergeFrom(from._impl_.map_);
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
@@ -379,7 +474,8 @@ inline void Person::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      /*decltype(_impl_.map_)*/{::_pbi::ArenaInitialized(), arena}
+    , decltype(_impl_.name_){}
     , decltype(_impl_.age_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -393,6 +489,7 @@ Person::~Person() {
   // @@protoc_insertion_point(destructor:msg.Person)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
+    ArenaDtor(this);
     return;
   }
   SharedDtor();
@@ -400,9 +497,15 @@ Person::~Person() {
 
 inline void Person::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.map_.Destruct();
+  _impl_.map_.~MapField();
   _impl_.name_.Destroy();
 }
 
+void Person::ArenaDtor(void* object) {
+  Person* _this = reinterpret_cast< Person* >(object);
+  _this->_impl_.map_.Destruct();
+}
 void Person::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
@@ -413,6 +516,7 @@ void Person::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.map_.Clear();
   _impl_.name_.ClearToEmpty();
   _impl_.age_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
@@ -439,6 +543,19 @@ const char* Person::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
           _impl_.age_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // map<int32, int32> map = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(&_impl_.map_, ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
         } else
           goto handle_unusual;
         continue;
@@ -487,6 +604,23 @@ uint8_t* Person::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_age(), target);
   }
 
+  // map<int32, int32> map = 3;
+  if (!this->_internal_map().empty()) {
+    using MapType = ::_pb::Map<int32_t, int32_t>;
+    using WireHelper = Person_MapEntry_DoNotUse::Funcs;
+    const auto& map_field = this->_internal_map();
+
+    if (stream->IsSerializationDeterministic() && map_field.size() > 1) {
+      for (const auto& entry : ::_pbi::MapSorterFlat<MapType>(map_field)) {
+        target = WireHelper::InternalSerialize(3, entry.first, entry.second, target, stream);
+      }
+    } else {
+      for (const auto& entry : map_field) {
+        target = WireHelper::InternalSerialize(3, entry.first, entry.second, target, stream);
+      }
+    }
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -502,6 +636,15 @@ size_t Person::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // map<int32, int32> map = 3;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_map_size());
+  for (::PROTOBUF_NAMESPACE_ID::Map< int32_t, int32_t >::const_iterator
+      it = this->_internal_map().begin();
+      it != this->_internal_map().end(); ++it) {
+    total_size += Person_MapEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+  }
 
   // string name = 1;
   if (!this->_internal_name().empty()) {
@@ -533,6 +676,7 @@ void Person::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBU
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  _this->_impl_.map_.MergeFrom(from._impl_.map_);
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
   }
@@ -558,6 +702,7 @@ void Person::InternalSwap(Person* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.map_.InternalSwap(&other->_impl_.map_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
@@ -568,7 +713,7 @@ void Person::InternalSwap(Person* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata Person::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_proto_5foption_2eproto_getter, &descriptor_table_proto_5foption_2eproto_once,
-      file_level_metadata_proto_5foption_2eproto[1]);
+      file_level_metadata_proto_5foption_2eproto[2]);
 }
 const std::string my_option_default("");
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::PROTOBUF_NAMESPACE_ID::FieldOptions,
@@ -581,6 +726,10 @@ PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::msg::MyMessage*
 Arena::CreateMaybeMessage< ::msg::MyMessage >(Arena* arena) {
   return Arena::CreateMessageInternal< ::msg::MyMessage >(arena);
+}
+template<> PROTOBUF_NOINLINE ::msg::Person_MapEntry_DoNotUse*
+Arena::CreateMaybeMessage< ::msg::Person_MapEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::msg::Person_MapEntry_DoNotUse >(arena);
 }
 template<> PROTOBUF_NOINLINE ::msg::Person*
 Arena::CreateMaybeMessage< ::msg::Person >(Arena* arena) {

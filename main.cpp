@@ -29,8 +29,12 @@ int main(int argc, char **argv)
     TimeTest test;
     test.ChronoTimeTest();
     std::unordered_map<int, int> map;
-    auto erase_num = map.erase(1);
-    LogInfo("format, ... %zu", erase_num);
+    map.insert({1, 1});
+    map.insert({2, 2});
+    map.insert({3, 3});
+    map.insert({4, 4});
+    map.erase(1);
+
     TestProtoOption();
     for (;;){
         // 睡眠10秒

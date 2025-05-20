@@ -29,9 +29,8 @@
             "command": "protoc",
             "args": [
                 "--proto_path=${workspaceFolder}/proto",
-                "-I=${workspaceFolder}/protoc-30.2/include",
                 "--cpp_out=${workspaceFolder}/proto_out",
-                "./proto/*.proto"
+                "${workspaceFolder}/proto/*.proto"
             ]
         },
         {
@@ -39,7 +38,7 @@
             "dependsOn":[
                 "cmake",
                 "make",
-                "protoc"
+                "protoc" // proto 编译不过时可以注释掉
             ]
         }
     ],

@@ -27,5 +27,8 @@ int main(int argc, char **argv)
 
     TimeTest test;
     test.ChronoTimeTest();
+    std::unordered_map<int, int> map;
+    auto erase_num = map.erase(1);
+    LogInfo("format, ... %zu", erase_num);
 
 }

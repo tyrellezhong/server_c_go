@@ -26,11 +26,13 @@ set(CMAKE_BUILD_TYPE Debug)
 
 # 向工程添加多个特定的头文件搜索路径
 include_directories(${CMAKE_SOURCE_DIR}/includes)
+# include_directories(/usr/local/include)
 
 file(GLOB_RECURSE srcs
         ./src/*.c
         ./src/*.cpp
         ./src/*.h
+        # ./proto_out/*.cc
         )
 
 # 编译SRC变量所代表的源代码文件，生成main可执行文件

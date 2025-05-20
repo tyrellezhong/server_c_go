@@ -27,9 +27,11 @@
             "type": "shell",
             "label": "protoc",
             "command": "protoc",
-            "args": ["--proto_path=${workspaceFolder}/includes",
-                    "--cpp_out=${workspaceFolder}/src",
-                    "proto_test.proto"
+            "args": [
+                "--proto_path=${workspaceFolder}/proto",
+                "-I=${workspaceFolder}/protoc-30.2/include",
+                "--cpp_out=${workspaceFolder}/proto_out",
+                "./proto/*.proto"
             ]
         },
         {

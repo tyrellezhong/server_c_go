@@ -28,29 +28,8 @@ int main(int argc, char **argv)
 
     TimeTest test;
     // test.ChronoTimeTest();
-    std::unordered_map<int, int> map;
-    map.insert({1, 1});
-    map.insert({2, 2});
-    map.insert({3, 3});
-    map.insert({4, 4});
-    map.erase(1);
+    TestProtoOption();
+    
 
-    // TestProtoOption();
-    header_static_var = 100;
-    header_extern_var = 1000;
-    mymath::header_namespace_static_var = 200;
-    mymath::namespace_extern_var = 2000;
-
-    printf("header_static_var=%d addr=%p \n \
-        header_extern_var=%d addr=%p \n \
-        header_namespace_static_var=%d addr=%p \n \
-        namespace_extern_var=%d addr=%p \n",
-        header_static_var, &header_static_var, // 每个文件的值不同，有自己的副本
-        header_extern_var, &header_extern_var,// 每个文件的值相同
-        mymath::header_namespace_static_var, &mymath::header_namespace_static_var,// 每个文件的值不同，有自己的副本
-        mymath::namespace_extern_var, &mymath::namespace_extern_var  // 每个文件的值相同
-    );
-
-    GetHeaderVar();
    
 }

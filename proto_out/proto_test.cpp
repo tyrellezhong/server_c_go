@@ -26,4 +26,7 @@ void TestProtoOption() {
         std::cout << "Custom option for 'age': " << age_option << std::endl;
     }
 
+    std::cout << "debug string: " << message.DebugString() << std::endl;
+    std::cout << "short debug string: " << message.ShortDebugString() << std::endl;
+
 }

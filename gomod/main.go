@@ -2,6 +2,7 @@ package main
 
 import (
 	_ "embed"
+	"gomod/filerw"
 	"log"
 	"runtime"
 	// _ "net/http/pprof" // 确保这里是匿名导入
@@ -28,4 +29,5 @@ func main() {
 	for i := 0; i < 10; i++ {
 		log.Println(i, testMap[i])
 	}
+	filerw.FileRW()
 }

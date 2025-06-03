@@ -3,6 +3,8 @@ package gotest
 import (
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/require"
 )
 
 func sub1(t *testing.T) {
@@ -14,6 +16,7 @@ func sub2(t *testing.T) {
 }
 func sub3(t *testing.T) {
 	t.Log("this is sub3")
+	require.Equal(t, 1, 2)
 }
 
 func TestSub(t *testing.T) {

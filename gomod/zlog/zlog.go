@@ -12,26 +12,50 @@ import (
 var Zlog = NewSLog()
 
 func NewSLog() *zap.Logger {
-	// 创建一个 lumberjack.Logger 实例
-	logger := &lumberjack.Logger{
-		Filename:   "app.log", // 日志文件名
-		MaxSize:    10,        // 每个日志文件的最大大小（MB）
-		MaxBackups: 3,         // 保留旧文件的最大个数
-		MaxAge:     28,        // 保留旧文件的最大天数
-		Compress:   true,      // 是否压缩/归档旧文件
+	// 配置 lumberjack 日志滚动
+	rollingLogger := &lumberjack.Logger{
+		Filename:   "test.log",
+		MaxSize:    10,   // 每个日志文件最大10MB
+		MaxBackups: 3,    // 保留最近的3个备份
+		MaxAge:     28,   // 保留28天
+		Compress:   true, // 压缩备份文件
 	}
 
-	// 创建 zap logger
-	zapLogger := zap.New(zapcore.NewCore(
-		zapcore.NewJSONEncoder(zap.NewProductionEncoderConfig()), // 日志格式
-		zapcore.AddSync(logger),                                  // 使用 lumberjack 作为输出
-		zapcore.InfoLevel,                                        // 日志级别
-	))
+	// 创建一个 JSON 编码器
+	encoderConfig := zapcore.EncoderConfig{
+		TimeKey:          "time",
+		LevelKey:         "level",
+		NameKey:          "logger",
+		CallerKey:        "caller",
+		MessageKey:       "msg",
+		StacktraceKey:    "stacktrace",
+		LineEnding:       zapcore.DefaultLineEnding,
+		EncodeLevel:      zapcore.CapitalLevelEncoder,
+		EncodeTime:       zapcore.TimeEncoderOfLayout("2006-01-02 15:04:05.000000"),
+		EncodeDuration:   zapcore.StringDurationEncoder,
+		EncodeCaller:     zapcore.ShortCallerEncoder,
+		ConsoleSeparator: " ",
+	}
+	encoder := zapcore.NewConsoleEncoder(encoderConfig)
+	// 创建 WriteSyncer
+	writer := zapcore.AddSync(rollingLogger)
 
-	zapcore.NewTee()
+	// 创建 Core
+	core := zapcore.NewCore(encoder, writer, zapcore.DebugLevel)
 
-	defer zapLogger.Sync() // 确保日志被写入
-	return zapLogger
+	// 使用 zap 的选项创建 Logger
+	logger := zap.New(core,
+		zap.AddCaller(),                        // 启用调用者信息
+		zap.Development(),                      // 开发模式，启用更详细的日志记录
+		zap.Fields(zap.String("app", "myApp")), // 添加默认字段
+	)
+
+	// 使用 Logger 记录日志
+	logger.Info("example : This is an info message")
+	logger.Debug("example : This is a debug message")
+
+	defer logger.Sync() // 确保日志被写入
+	return logger
 }
 
 // CustomCore 是一个自定义的 zapcore.Core 实现
@@ -125,4 +149,8 @@ func NewCustomZLog() {
 
 	// 使用带有额外字段的 logger 记录日志
 	loggerWithFields.Info("This is an info message with additional fields", zap.String("status", "success"))
+
+	logSugar := loggerWithFields.Sugar()
+	logSugar.Infof("This is an info message with additional fields %d %d %d", 1, 2, 3)
+	logSugar.Warn("This is an info message with additional fields ", 1, 2, 3, 4, 5)
 }

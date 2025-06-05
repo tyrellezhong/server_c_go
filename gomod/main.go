@@ -7,7 +7,8 @@ import (
 
 	// _ "net/http/pprof" // 确保这里是匿名导入
 	// txttemplate "gomod/txt_template"
-	"gomod/flagex"
+
+	"gomod/interfaceex"
 )
 
 func main() {
@@ -27,5 +28,6 @@ func main() {
 	// 	log.Println("sleep 5s")
 	// }
 	// filerw.FileRW()
-	flagex.PrintFlagArgs()
+	// flagex.PrintFlagArgs()
+	interfaceex.InterfaceTest()
 }

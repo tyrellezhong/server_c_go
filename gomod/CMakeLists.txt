@@ -3,7 +3,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build)
 
 add_custom_target(${APP} ALL
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        COMMAND go build "-gcflags=all=-N -l" -o ${EXECUTABLE_OUTPUT_PATH}/${APP} "-gcflags=all=-N -l"
+        COMMAND go build "-gcflags=all=-N -l" -o ${EXECUTABLE_OUTPUT_PATH}/${APP}
         VERBATIM
         )
 

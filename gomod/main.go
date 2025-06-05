@@ -2,11 +2,12 @@ package main
 
 import (
 	_ "embed"
-	"gomod/filerw"
 	"log"
 	"runtime"
+
 	// _ "net/http/pprof" // 确保这里是匿名导入
 	// txttemplate "gomod/txt_template"
+	"gomod/flagex"
 )
 
 func main() {
@@ -25,9 +26,6 @@ func main() {
 	// 	time.Sleep(5 * time.Second)
 	// 	log.Println("sleep 5s")
 	// }
-	testMap := make(map[int]int)
-	for i := 0; i < 10; i++ {
-		log.Println(i, testMap[i])
-	}
-	filerw.FileRW()
+	// filerw.FileRW()
+	flagex.PrintFlagArgs()
 }

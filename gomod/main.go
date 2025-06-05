@@ -9,6 +9,7 @@ import (
 	// txttemplate "gomod/txt_template"
 
 	"gomod/interfaceex"
+	"gomod/zlog"
 )
 
 func main() {
@@ -30,4 +31,5 @@ func main() {
 	// filerw.FileRW()
 	// flagex.PrintFlagArgs()
 	interfaceex.InterfaceTest()
+	zlog.NewCustomZLog()
 }

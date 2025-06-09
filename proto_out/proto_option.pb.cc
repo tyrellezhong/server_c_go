@@ -23,7 +23,9 @@ namespace _pbi = _pb::internal;
 namespace msg {
 PROTOBUF_CONSTEXPR MyMessage::MyMessage(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.scores_)*/{}
+  , /*decltype(_impl_._scores_cached_byte_size_)*/{0}
+  , /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.person_)*/nullptr
   , /*decltype(_impl_.age_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
@@ -77,6 +79,7 @@ const uint32_t TableStruct_proto_5foption_2eproto::offsets[] PROTOBUF_SECTION_VA
   PROTOBUF_FIELD_OFFSET(::msg::MyMessage, _impl_.name_),
   PROTOBUF_FIELD_OFFSET(::msg::MyMessage, _impl_.age_),
   PROTOBUF_FIELD_OFFSET(::msg::MyMessage, _impl_.person_),
+  PROTOBUF_FIELD_OFFSET(::msg::MyMessage, _impl_.scores_),
   PROTOBUF_FIELD_OFFSET(::msg::Person_MapEntry_DoNotUse, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::msg::Person_MapEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -99,8 +102,8 @@ const uint32_t TableStruct_proto_5foption_2eproto::offsets[] PROTOBUF_SECTION_VA
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::msg::MyMessage)},
-  { 9, 17, -1, sizeof(::msg::Person_MapEntry_DoNotUse)},
-  { 19, -1, -1, sizeof(::msg::Person)},
+  { 10, 18, -1, sizeof(::msg::Person_MapEntry_DoNotUse)},
+  { 20, -1, -1, sizeof(::msg::Person)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -111,22 +114,23 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_proto_5foption_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\022proto_option.proto\022\003msg\032 google/protob"
-  "uf/descriptor.proto\"\210\001\n\tMyMessage\022)\n\004nam"
+  "uf/descriptor.proto\"\264\001\n\tMyMessage\022)\n\004nam"
   "e\030\001 \001(\tB\033\212\265\030\027This is a custom option\022\"\n\003"
   "age\030\002 \001(\005B\025\212\265\030\021Age of the person\022,\n\006pers"
-  "on\030\003 \001(\0132\013.msg.PersonB\017\212\265\030\013Person info\"r"
-  "\n\006Person\022\014\n\004name\030\001 \001(\t\022\013\n\003age\030\002 \001(\005\022!\n\003m"
-  "ap\030\003 \003(\0132\024.msg.Person.MapEntry\032*\n\010MapEnt"
-  "ry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001:2\n\tmy"
-  "_option\022\035.google.protobuf.FieldOptions\030\321"
-  "\206\003 \001(\tb\006proto3"
+  "on\030\003 \001(\0132\013.msg.PersonB\017\212\265\030\013Person info\022*"
+  "\n\006scores\030\004 \003(\005B\032\030\001\212\265\030\024Scores of the pers"
+  "on\"r\n\006Person\022\014\n\004name\030\001 \001(\t\022\013\n\003age\030\002 \001(\005\022"
+  "!\n\003map\030\003 \003(\0132\024.msg.Person.MapEntry\032*\n\010Ma"
+  "pEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001:2"
+  "\n\tmy_option\022\035.google.protobuf.FieldOptio"
+  "ns\030\321\206\003 \001(\tb\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_proto_5foption_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_proto_5foption_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_proto_5foption_2eproto = {
-    false, false, 374, descriptor_table_protodef_proto_5foption_2eproto,
+    false, false, 418, descriptor_table_protodef_proto_5foption_2eproto,
     "proto_option.proto",
     &descriptor_table_proto_5foption_2eproto_once, descriptor_table_proto_5foption_2eproto_deps, 1, 3,
     schemas, file_default_instances, TableStruct_proto_5foption_2eproto::offsets,
@@ -162,7 +166,9 @@ MyMessage::MyMessage(const MyMessage& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   MyMessage* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      decltype(_impl_.scores_){from._impl_.scores_}
+    , /*decltype(_impl_._scores_cached_byte_size_)*/{0}
+    , decltype(_impl_.name_){}
     , decltype(_impl_.person_){nullptr}
     , decltype(_impl_.age_){}
     , /*decltype(_impl_._cached_size_)*/{}};
@@ -188,7 +194,9 @@ inline void MyMessage::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      decltype(_impl_.scores_){arena}
+    , /*decltype(_impl_._scores_cached_byte_size_)*/{0}
+    , decltype(_impl_.name_){}
     , decltype(_impl_.person_){nullptr}
     , decltype(_impl_.age_){0}
     , /*decltype(_impl_._cached_size_)*/{}
@@ -210,6 +218,7 @@ MyMessage::~MyMessage() {
 
 inline void MyMessage::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.scores_.~RepeatedField();
   _impl_.name_.Destroy();
   if (this != internal_default_instance()) delete _impl_.person_;
 }
@@ -224,6 +233,7 @@ void MyMessage::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.scores_.Clear();
   _impl_.name_.ClearToEmpty();
   if (GetArenaForAllocation() == nullptr && _impl_.person_ != nullptr) {
     delete _impl_.person_;
@@ -261,6 +271,17 @@ const char* MyMessage::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_person(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated int32 scores = 4 [deprecated = true, (.msg.my_option) = "Scores of the person"];
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedInt32Parser(_internal_mutable_scores(), ptr, ctx);
+          CHK_(ptr);
+        } else if (static_cast<uint8_t>(tag) == 32) {
+          _internal_add_scores(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -317,6 +338,15 @@ uint8_t* MyMessage::_InternalSerialize(
         _Internal::person(this).GetCachedSize(), target, stream);
   }
 
+  // repeated int32 scores = 4 [deprecated = true, (.msg.my_option) = "Scores of the person"];
+  {
+    int byte_size = _impl_._scores_cached_byte_size_.load(std::memory_order_relaxed);
+    if (byte_size > 0) {
+      target = stream->WriteInt32Packed(
+          4, _internal_scores(), byte_size, target);
+    }
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -332,6 +362,20 @@ size_t MyMessage::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // repeated int32 scores = 4 [deprecated = true, (.msg.my_option) = "Scores of the person"];
+  {
+    size_t data_size = ::_pbi::WireFormatLite::
+      Int32Size(this->_impl_.scores_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::_pbi::WireFormatLite::Int32Size(static_cast<int32_t>(data_size));
+    }
+    int cached_size = ::_pbi::ToCachedSize(data_size);
+    _impl_._scores_cached_byte_size_.store(cached_size,
+                                    std::memory_order_relaxed);
+    total_size += data_size;
+  }
 
   // string name = 1 [(.msg.my_option) = "This is a custom option"];
   if (!this->_internal_name().empty()) {
@@ -370,6 +414,7 @@ void MyMessage::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROT
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  _this->_impl_.scores_.MergeFrom(from._impl_.scores_);
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
   }
@@ -399,6 +444,7 @@ void MyMessage::InternalSwap(MyMessage* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.scores_.InternalSwap(&other->_impl_.scores_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena

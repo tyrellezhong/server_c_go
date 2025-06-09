@@ -189,10 +189,33 @@ class MyMessage final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kScoresFieldNumber = 4,
     kNameFieldNumber = 1,
     kPersonFieldNumber = 3,
     kAgeFieldNumber = 2,
   };
+  // repeated int32 scores = 4 [deprecated = true, (.msg.my_option) = "Scores of the person"];
+  PROTOBUF_DEPRECATED int scores_size() const;
+  private:
+  int _internal_scores_size() const;
+  public:
+  PROTOBUF_DEPRECATED void clear_scores();
+  private:
+  int32_t _internal_scores(int index) const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >&
+      _internal_scores() const;
+  void _internal_add_scores(int32_t value);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >*
+      _internal_mutable_scores();
+  public:
+  PROTOBUF_DEPRECATED int32_t scores(int index) const;
+  PROTOBUF_DEPRECATED void set_scores(int index, int32_t value);
+  PROTOBUF_DEPRECATED void add_scores(int32_t value);
+  PROTOBUF_DEPRECATED const ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >&
+      scores() const;
+  PROTOBUF_DEPRECATED ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >*
+      mutable_scores();
+
   // string name = 1 [(.msg.my_option) = "This is a custom option"];
   void clear_name();
   const std::string& name() const;
@@ -242,6 +265,8 @@ class MyMessage final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t > scores_;
+    mutable std::atomic<int> _scores_cached_byte_size_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::msg::Person* person_;
     int32_t age_;
@@ -637,6 +662,53 @@ inline void MyMessage::set_allocated_person(::msg::Person* person) {
   }
   _impl_.person_ = person;
   // @@protoc_insertion_point(field_set_allocated:msg.MyMessage.person)
+}
+
+// repeated int32 scores = 4 [deprecated = true, (.msg.my_option) = "Scores of the person"];
+inline int MyMessage::_internal_scores_size() const {
+  return _impl_.scores_.size();
+}
+inline int MyMessage::scores_size() const {
+  return _internal_scores_size();
+}
+inline void MyMessage::clear_scores() {
+  _impl_.scores_.Clear();
+}
+inline int32_t MyMessage::_internal_scores(int index) const {
+  return _impl_.scores_.Get(index);
+}
+inline int32_t MyMessage::scores(int index) const {
+  // @@protoc_insertion_point(field_get:msg.MyMessage.scores)
+  return _internal_scores(index);
+}
+inline void MyMessage::set_scores(int index, int32_t value) {
+  _impl_.scores_.Set(index, value);
+  // @@protoc_insertion_point(field_set:msg.MyMessage.scores)
+}
+inline void MyMessage::_internal_add_scores(int32_t value) {
+  _impl_.scores_.Add(value);
+}
+inline void MyMessage::add_scores(int32_t value) {
+  _internal_add_scores(value);
+  // @@protoc_insertion_point(field_add:msg.MyMessage.scores)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >&
+MyMessage::_internal_scores() const {
+  return _impl_.scores_;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >&
+MyMessage::scores() const {
+  // @@protoc_insertion_point(field_list:msg.MyMessage.scores)
+  return _internal_scores();
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >*
+MyMessage::_internal_mutable_scores() {
+  return &_impl_.scores_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >*
+MyMessage::mutable_scores() {
+  // @@protoc_insertion_point(field_mutable_list:msg.MyMessage.scores)
+  return _internal_mutable_scores();
 }
 
 // -------------------------------------------------------------------

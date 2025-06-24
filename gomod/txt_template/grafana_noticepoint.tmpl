@@ -1,42 +1,48 @@
 {{ define "message_body" }}
     **告警状态**：{{ .Status }}
-    **告警总数**：{{ len .Alerts.Firing }}
+    **告警总数**：{{ len .Alerts }}
     **正在告警**：{{ len .Alerts.Firing }} 
     **告警恢复**：{{ len .Alerts.Resolved }}
-    **分组标签**：
+    <font color=#6495ED>**分组标签**：</font>
       {{- range $key, $value := .GroupLabels }}
         **{{ $key }}**: {{ $value }}
       {{- end }}
-    **相同标签值**：
+    <font color=#2E8B57>**相同标签值**：</font>
     {{- range $key, $value := .CommonLabels }}
       {{- if not (index $.GroupLabels $key)}}
         **{{ $key }}**: {{ $value }}
       {{- end }}
     {{- end }}
-    **相同标注值**：
+    <font color=#CD853F>**相同标注值**：</font>
       {{- range $key, $value := .CommonAnnotations }}
         **{{ $key }}**: {{ $value }}
       {{- end }}
   {{ range .Alerts.Firing }}
     **开始时间**：{{ .StartsAt.Format "2006-01-02 15:04:05 -0700"}}
     **告警状态**：{{ .Status }}
-    **独有标签值**：
+    <font color=#2E8B57>**独有标签值**：</font>
     {{- range $key, $value := .Labels }}
       {{- if not (index $.CommonLabels $key) }}
         **{{ $key }}**: {{ $value }}
       {{- end }}
     {{- end }}
-    **独有标注值**:
+    <font color=#CD853F>**独有标注值**:</font>
     {{- range $key, $value := .Annotations }}
       {{- if not (index $.CommonAnnotations $key) }}
         **{{ $key }}**: {{ $value }}
       {{- end }}
     {{- end }}
+    {{- if .DashboardURL }}
+    [DashboardURL]({{ reReplaceAll "http://localhost:18830" "https://cfrmonitor.woa.com" .DashboardURL }})
+    {{- end }}
+    {{- if .PanelURL }}
+    [PanelURL]({{ reReplaceAll "http://localhost:18830" "https://cfrmonitor.woa.com" .PanelURL }})
+    {{- end }}
   {{ end }}
 {{- end }}
 
 
-{{- define "message_at" -}}
+{{ define "message_at" }}
   {{- if eq .GroupLabels.service "dsagent" -}}
     <@capriwang> <@levinlin>
   {{- else if eq .GroupLabels.service "tconnd_lobby" -}}
@@ -46,19 +52,19 @@
   {{- else if eq .GroupLabels.service "dscenter" -}}
     <@capriwang> <@levinlin>
   {{- else if eq .GroupLabels.service "dbsvrd" -}}
-    <@levinlin> <@josiahlv> <@austinebai>
+    <@levinlin> <@josiahlv>
   {{- else if eq .GroupLabels.service "accountsvrd" -}}
     <@josiahlv> <@xiaokaigao>
   {{- else if eq .GroupLabels.service "vlog" -}}
     <@paveelin> <@levinlin>
   {{- else if eq .GroupLabels.service "gamefriend" -}}
-    <@austinebai> <@taylorzhong>
+    <@taylorzhong>
   {{- else if eq .GroupLabels.service "deposit" -}}
     <@capriwang> <@ashtongao>
   {{- else if eq .GroupLabels.service "allocmgrsvrd" -}}
-    <@josiahlv> <@austinebai> <@ashtongao>
+    <@josiahlv> <@ashtongao>
   {{- else if eq .GroupLabels.service "room_match" -}}
-    <@josiahlv> <@austinebai> <@ashtongao>
+    <@josiahlv> <@ashtongao>
   {{- else if eq .GroupLabels.service "rank" -}}
     <@josiahlv> <@sheehanma>
   {{- else if eq .GroupLabels.service "timer" -}}
@@ -66,21 +72,21 @@
   {{- else if eq .GroupLabels.service "game_statis" -}}
     <@xiaokaigao> <@sheehanma>
   {{- else if eq .GroupLabels.service "player_state" -}}
-    <@austinebai> <@levinlin>
+   <@levinlin>
   {{- else if eq .GroupLabels.service "player_info" -}}
-    <@austinebai>
+    <@taylorzhong>
   {{- else if eq .GroupLabels.service "chat" -}}
-    <@austinebai> <@ashtongao>
+    <@taylorzhong>
   {{- else if eq .GroupLabels.service "mail" -}}
-    <@ashtongao> <@austinebai>
+    <@ashtongao>
   {{- else if eq .GroupLabels.service "room" -}}
-    <@josiahlv> <@austinebai> <@ashtongao>
+    <@josiahlv> <@ashtongao>
   {{- else if eq .GroupLabels.service "room_center" -}}
     <@capriwang> <@josiahlv>
   {{- else if eq .GroupLabels.service "team" -}}
-    <@austinebai> <@capriwang>
+    <@taylorzhong> <@capriwang>
   {{- else if eq .GroupLabels.service "store" -}}
-    <@austinebai> <@josiahlv>
+    <@josiahlv>
   {{- else if eq .GroupLabels.service "trace_cache" -}}
     <@josiahlv>
   {{- else if eq .GroupLabels.service "idipsvr" -}}
@@ -96,15 +102,15 @@
   {{- else if eq .GroupLabels.service "lottery" -}}
     <@ashtongao> <@josiahlv>
   {{- else if eq .GroupLabels.service "gamefriendrec" -}}
-    <@austinebai> <@taylorzhong>
+    <@taylorzhong>
   {{- else if eq .GroupLabels.service "playersearch" -}}
-    <@austinebai> <@taylorzhong>
+    <@taylorzhong>
   {{- else if eq .GroupLabels.service "chatroom" -}}
-    <@austinebai> <@ashtongao>
+    <@taylorzhong>
   {{- else if eq .GroupLabels.service "chatroommgr" -}}
-    <@austinebai> <@ashtongao>
+    <@taylorzhong> <@ashtongao>
   {{- else if eq .GroupLabels.service "recruitcenter" -}}
-    <@austinebai> <@capriwang>
+    <@taylorzhong> <@capriwang>
   {{- else if eq .GroupLabels.service "ailabagent" -}}
     <@paveelin> <@xiaokaigao>
   {{- else if eq .GroupLabels.service "evaluate" -}}
@@ -112,15 +118,15 @@
   {{- else if eq .GroupLabels.service "dslauncher" -}}
     <@paveelin> <@levinlin>
   {{- else if eq .GroupLabels.service "activity" -}}
-    <@levinlin> <@sheehanma>
+    <@taylorzhong> <@levinlin>
   {{- else if eq .GroupLabels.service "data_agent" -}}
     <@xiaokaigao> <@josiahlv>
   {{- else if eq .GroupLabels.service "memosvr" -}}
-    <@sheehanma> <@austinebai>
+    <@sheehanma>
   {{- else if eq .GroupLabels.service "homepage" -}}
     <@sheehanma> <@levinlin>
   {{- else if eq .GroupLabels.service "pingtrack" -}}
-    <@levinlin> <@austinebai> <@ashtongao>
+    <@levinlin> <@ashtongao>
   {{- else if eq .GroupLabels.service "perf_agent" -}}
     <@xiaokaigao> <@sheehanma>
   {{- else if eq .GroupLabels.service "guild" -}}
@@ -128,7 +134,7 @@
   {{- else if eq .GroupLabels.service "player_guild" -}}
     <@all>
   {{- else if eq .GroupLabels.service "dsping" -}}
-    <@levinlin> <@austinebai> <@ashtongao>
+    <@levinlin> <@ashtongao>
   {{- else if eq .GroupLabels.service "guild_cache" -}}
     <@all>
   {{- else if eq .GroupLabels.service "online" -}}
@@ -154,7 +160,7 @@
   {{- else if eq .GroupLabels.service "moment" -}}
     <@all>
   {{- else if eq .GroupLabels.service "herofriend" -}}
-    <@austinebai> <@taylorzhong>
+    <@taylorzhong>
   {{- else if eq .GroupLabels.service "maincity" -}}
     <@all>
   {{- else if eq .GroupLabels.service "payproxy" -}}
@@ -168,7 +174,7 @@
   {{- else if eq .GroupLabels.service "csntf_router" -}}
     <@xiaokaigao> <@josiahlv>
   {{- else if eq .GroupLabels.service "reconciliation" -}}
-    <@ashtongao> <@austinebai>
+    <@ashtongao>
   {{- else if eq .GroupLabels.service "avataragent" -}}
     <@gevinzheng> <@xiaokaigao>
   {{- else if eq .GroupLabels.service "dslagent" -}}

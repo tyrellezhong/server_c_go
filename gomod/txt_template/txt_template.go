@@ -126,6 +126,14 @@ func ConditionTest() {
 
 	t3 := template.Must(template.New("fileexamp").ParseFiles("../gomod/txt_template/grafana_noticepoint.tmpl"))
 
-	t3.ExecuteTemplate(os.Stdout, "message_at", "vlog")
+	at := map[string]map[string]string{
+		"GroupLabels": {
+			"service": "playersearch",
+			"warning": "HighMemoryUsage",
+		},
+	}
+
+	// 执行指定模版
+	t3.ExecuteTemplate(os.Stdout, "message_at", at)
 
 }

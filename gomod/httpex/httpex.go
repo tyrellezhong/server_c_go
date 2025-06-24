@@ -32,6 +32,8 @@ func UrlEncode() {
 
 	name := queryValue.Get("name")
 	fmt.Printf("name:%s\n", name)
+	hobby := queryValue.Get("hobby")
+	fmt.Printf("hobby:%s\n", hobby)
 
 	// 构建完整的 URL
 	baseURL := "https://example.com/search"

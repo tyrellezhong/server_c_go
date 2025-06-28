@@ -1,3 +1,5 @@
+{{ define "event_notify" }} <font size=20 color=#3CB371>【事件通知】 {{ .CommonLabels.Event }} {{ if .CommonLabels.build_trigger }} <@{{ .CommonLabels.build_trigger }}> {{ end }}  </font> {{ end }}
+
 {{ define "message_body" }}
     **告警状态**：{{ .Status }}
     **告警总数**：{{ len .Alerts }}
@@ -33,10 +35,10 @@
       {{- end }}
     {{- end }}
     {{- if .DashboardURL }}
-    [DashboardURL]({{ reReplaceAll "http://localhost:18830" "https://cfrmonitor.woa.com" .DashboardURL }})
+    [DashboardURL]({{ .DashboardURL }})
     {{- end }}
     {{- if .PanelURL }}
-    [PanelURL]({{ reReplaceAll "http://localhost:18830" "https://cfrmonitor.woa.com" .PanelURL }})
+    [PanelURL]({{ .PanelURL }})
     {{- end }}
   {{ end }}
 {{- end }}

@@ -63,7 +63,7 @@
             "preLaunchTask": "Build", //使用tasks.json中的哪个label生成可执行文件
             "args":[
                 "-name",
-                "xxx",
+                "5aSc5p6t5a6J5Lic6I6eMzg1",
                 "-bool"
             ]
         },

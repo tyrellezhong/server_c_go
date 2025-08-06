@@ -3,7 +3,7 @@
 void TestProtoOption() {
     // 创建 MyMessage 实例
     msg::MyMessage message;
-    message.set_name("John");
+    message.set_name("John\"");
     message.set_age(42);
     message.mutable_person()->mutable_map()->insert({1, 2});
     // message.PrintDebugString();

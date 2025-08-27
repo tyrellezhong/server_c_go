@@ -128,3 +128,22 @@ enum Role {
   let emptyValue: null = null;
   let uninitializedValue: undefined = undefined;
 
+// 可变参数
+function buildName(firstName: string, ...restOfName: string[]) {
+    return firstName + " " + restOfName.join(" ");
+}
+  
+let employeeName = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
+
+function addNumbers(...nums:number[]) {  
+  var i = 0;   
+  var sum:number = 0; 
+  
+  for(i = 0; i < nums.length; i++) { 
+     sum = sum + nums[i]; 
+  } 
+  console.log("和为：",sum) 
+} 
+addNumbers(1,2,3) 
+
+var test_str : string = "test";

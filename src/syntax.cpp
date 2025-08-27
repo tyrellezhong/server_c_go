@@ -1,7 +1,7 @@
 #include <cstdarg>
 #include "syntax.h"
 // 需要提供参数个数
-int Sum(int n, ...) {
+int sum_c_macro(int n, ...) {
     int total = 0;
     va_list args;
     va_start(args, n);

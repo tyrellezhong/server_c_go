@@ -26,10 +26,9 @@ int main(int argc, char **argv)
     
     LogInfo("begin new program : %s", argv[0]);
 
-    TimeTest test;
-    // test.ChronoTimeTest();
-    TestProtoOption();
-    
+    printf("test result begin: \n");
+    std::cout << bool_test(true, false, true);
+    printf("\ntest result end \n");
 
    
 }

@@ -17,6 +17,7 @@
 #include <vector>
 #include "std_example.h"
 #include "proto_test.h"
+#include "class_construction.h"
 
 using namespace std;
 
@@ -27,8 +28,8 @@ int main(int argc, char **argv)
     LogInfo("begin new program : %s", argv[0]);
 
     printf("test result begin: \n");
-    std::cout << bool_test(true, false, true);
+    // std::cout << bool_test(true, false, true);
     printf("\ntest result end \n");
-
+    TestClassFunctions();
    
 }

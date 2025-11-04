@@ -28,8 +28,9 @@ int main(int argc, char **argv)
     LogInfo("begin new program : %s", argv[0]);
 
     printf("test result begin: \n");
-    // std::cout << bool_test(true, false, true);
+    float x = 1.15f;
+    int y = static_cast<int>(x);
+    printf("float to int: %d \n", y);
     printf("\ntest result end \n");
-    TestClassFunctions();
    
 }

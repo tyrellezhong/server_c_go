@@ -1,4 +1,5 @@
 // C++类的测试用例，测试类的拷贝构造函数，拷贝赋值运算符，移动构造函数，移动赋值运算符，析构函数
+#include <unistd.h>
 #include <iostream>
 #include <string>
 
@@ -64,5 +65,6 @@ void TestClassFunctions() {
     TestClass obj5("Another", 200);
     obj5 = std::move(obj4); // 调用移动赋值运算符
     int* test = nullptr;
+    sleep(6456464);
     delete test; // 测试delete nullptr的安全性
 }

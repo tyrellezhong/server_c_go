@@ -128,7 +128,7 @@ func ConditionTest() {
 
 	at := map[string]map[string]string{
 		"GroupLabels": {
-			"service": "playersearch",
+			"service": "ds_3",
 			"warning": "HighMemoryUsage",
 		},
 	}

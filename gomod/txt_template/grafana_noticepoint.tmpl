@@ -45,8 +45,8 @@
 
 
 {{ define "message_at" }}
-  {{- if eq .GroupLabels.service "dsagent" -}}
-    <@capriwang> <@levinlin>
+  {{- if eq .GroupLabels.service "dsagent" "ds_1" "ds_2" "ds_3" "ds_4" -}}
+    <@capriwang> <@levinlin> <@--------->
   {{- else if eq .GroupLabels.service "tconnd_lobby" -}}
     <@capriwang> <@ashtongao> <@sheehanma>
   {{- else if eq .GroupLabels.service "lobbysvrd" -}}

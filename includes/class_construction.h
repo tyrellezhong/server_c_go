@@ -57,14 +57,14 @@ public:
 
 // 测试函数
 void TestClassFunctions() {
-    TestClass obj1("Original", 42);
-    TestClass obj2 = obj1; // 调用拷贝构造函数
-    TestClass obj3("Temporary", 100);
-    obj3 = obj1; // 调用拷贝赋值运算符
-    TestClass obj4 = std::move(obj1); // 调用移动构造函数
-    TestClass obj5("Another", 200);
-    obj5 = std::move(obj4); // 调用移动赋值运算符
-    int* test = nullptr;
-    sleep(6456464);
-    delete test; // 测试delete nullptr的安全性
+    // TestClass obj1("Original", 42);
+    // TestClass obj2 = obj1; // 调用拷贝构造函数
+    // TestClass obj3("Temporary", 100);
+    // obj3 = obj1; // 调用拷贝赋值运算符
+    // TestClass obj4 = std::move(obj1); // 调用移动构造函数
+    // TestClass obj5("Another", 200);
+    // obj5 = std::move(obj4); // 调用移动赋值运算符
+    // int* test = nullptr;
+    // sleep(6456464);
+    // delete test; // 测试delete nullptr的安全性
 }

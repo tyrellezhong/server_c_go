@@ -1,0 +1,1 @@
+-- traces 表由 otel-collector clickhouse exporter 自动创建

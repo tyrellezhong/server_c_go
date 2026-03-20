@@ -1,0 +1,55 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+exporters:
+  clickhouse/logs:
+    endpoint: tcp://clickhouse:9000
+    database: otel
+    logs_table_name: otel_logs
+    timeout: 5s
+    sending_queue:
+      enabled: true
+      queue_size: 10000
+    retry_on_failure:
+      enabled: true
+
+  clickhouse/metrics:
+    endpoint: tcp://clickhouse:9000
+    database: otel
+    metrics_table_name: otel_metrics
+    timeout: 5s
+    sending_queue:
+      enabled: true
+      queue_size: 10000
+    retry_on_failure:
+      enabled: true
+
+  clickhouse/traces:
+    endpoint: tcp://clickhouse:9000
+    database: otel
+    traces_table_name: otel_traces
+    timeout: 5s
+    sending_queue:
+      enabled: true
+      queue_size: 10000
+    retry_on_failure:
+      enabled: true
+
+service:
+  pipelines:
+    logs:
+      receivers: [otlp]
+      exporters: [clickhouse/logs]
+
+    metrics:
+      receivers: [otlp]
+      exporters: [clickhouse/metrics]
+
+    traces:
+      receivers: [otlp]
+      exporters: [clickhouse/traces]

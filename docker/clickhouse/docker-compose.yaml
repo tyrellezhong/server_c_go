@@ -28,6 +28,15 @@ services:
     ports:
       - "4317:4317"   # OTLP gRPC
       - "4318:4318"   # OTLP HTTP
+      - "8888:8888"   # Prometheus 自监控指标
+      - "13133:13133" # 健康检查
+      - "55679:55679" # zpages 调试
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:13133/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     depends_on:
       clickhouse:
         condition: service_healthy

@@ -13,7 +13,7 @@ datasources:
       username: default
       logs:
         defaultDatabase: otel
-        defaultTable: otel_logs
+        defaultTable: otel_logs_json
         otelEnabled: true
         otelVersion: latest
         timeColumn: Timestamp
@@ -43,4 +43,4 @@ datasources:
         spanStartTimeShift: "-1m"
         spanEndTimeShift: "1m"
     secureJsonData:
-      password: ""
+      password: "default"

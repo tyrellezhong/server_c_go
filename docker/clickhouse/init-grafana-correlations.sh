@@ -34,7 +34,7 @@ curl -s -X POST "${GRAFANA_URL}/api/datasources/uid/clickhouse_otel/correlations
           "uid": "clickhouse_otel"
         },
         "queryType": "logs",
-        "rawSql": "SELECT Timestamp as `timestamp`, Body as `body`, SeverityText as `level`, Env, ServiceName, TraceId, SpanId, ResourceAttributes, ScopeAttributes, LogAttributes FROM `otel`.`otel_logs` WHERE TraceId = ${__value.raw:sqlstring} AND SpanId = ${__data.fields.spanID:sqlstring} ORDER BY timestamp ASC LIMIT 1000",
+        "rawSql": "SELECT Timestamp as `timestamp`, Body as `body`, SeverityText as `level`, Env, ServiceName, TraceId, SpanId, ResourceAttributes, ScopeAttributes, LogAttributes FROM `otel`.`otel_logs_json` WHERE TraceId = ${__value.raw:sqlstring} AND SpanId = ${__data.fields.spanID:sqlstring} ORDER BY timestamp ASC LIMIT 1000",
         "format": 2
       }
     }

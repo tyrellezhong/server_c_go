@@ -3,9 +3,9 @@ extensions:
   health_check:
     endpoint: 0.0.0.0:13133
     path: /health
-  # pprof 性能分析（生产可按需关闭）
-  pprof:
-    endpoint: 0.0.0.0:1777
+  # # pprof 性能分析（生产可按需关闭）
+  # pprof:
+  #   endpoint: 0.0.0.0:1777
   # zpages 实时调试页面
   zpages:
     endpoint: 0.0.0.0:55679
@@ -56,20 +56,20 @@ processors:
     send_batch_max_size: 5000
 
   # 资源属性处理：统一补充/覆盖环境标识
-  resource:
-    attributes:
-      - key: collector.version
-        value: "1.0"
-        action: upsert
+  # resource:
+  #   attributes:
+  #     - key: collector.version
+  #       value: "1.0"
+  #       action: upsert
 
   # 属性过滤：删除敏感或无用字段，降低存储成本
-  attributes/sanitize:
-    actions:
-      # 删除可能包含敏感信息的 HTTP 请求头
-      - key: http.request.header.authorization
-        action: delete
-      - key: http.request.header.cookie
-        action: delete
+  # attributes/sanitize:
+  #   actions:
+  #     # 删除可能包含敏感信息的 HTTP 请求头
+  #     - key: http.request.header.authorization
+  #       action: delete
+  #     - key: http.request.header.cookie
+  #       action: delete
 
   # Tail Sampling（尾部采样）：只保留有价值的 Trace
   # 生产建议：错误全保留 + 慢请求全保留 + 正常请求按比例采样
@@ -98,15 +98,21 @@ processors:
   #         sampling_percentage: 10
 
 exporters:
+  
   clickhouse/logs:
-    endpoint: tcp://clickhouse:9000
+    endpoint: tcp://clickhouse:9000?enable_json_type=1
     database: otel
-    logs_table_name: otel_logs
-    # 禁止 exporter 自动建表，由 initdb/ 下的 SQL 手动管理 schema
-    create_schema: false
+    logs_table_name: otel_logs_json
+    traces_table_name: otel_traces_json
     timeout: 10s
+    create_schema: false
     async_insert: true
     compress: lz4
+    json: true
+    username: default
+    password: default
+    connection_params:
+      output_format_native_write_json_as_string: "1"
     # 异步发送队列
     sending_queue:
       enabled: true
@@ -120,42 +126,30 @@ exporters:
       max_interval: 30s
       max_elapsed_time: 300s
 
-  clickhouse/metrics:
+  clickhouse/traces:
     endpoint: tcp://clickhouse:9000
     database: otel
-    # 禁止 exporter 自动建表，由 initdb/ 下的 SQL 手动管理 schema
-    create_schema: false
+    traces_table_name: otel_traces
     timeout: 10s
+    create_schema: false
     async_insert: true
     compress: lz4
+    username: default
+    password: default
+    # 异步发送队列
     sending_queue:
       enabled: true
-      num_consumers: 2
+      # 队列满时阻塞而非丢弃
+      num_consumers: 4
       queue_size: 10000
+    # 失败重试策略
     retry_on_failure:
       enabled: true
       initial_interval: 5s
       max_interval: 30s
       max_elapsed_time: 300s
 
-  clickhouse/traces:
-    endpoint: tcp://clickhouse:9000
-    database: otel
-    traces_table_name: otel_traces
-    # 禁止 exporter 自动建表，由 initdb/ 下的 SQL 手动管理 schema
-    create_schema: false
-    timeout: 10s
-    async_insert: true
-    compress: lz4
-    sending_queue:
-      enabled: true
-      num_consumers: 4
-      queue_size: 10000
-    retry_on_failure:
-      enabled: true
-      initial_interval: 5s
-      max_interval: 30s
-      max_elapsed_time: 300s
+  # clickhouse/metrics:
 
   # Collector 自身指标上报（可对接 Prometheus）
   # prometheus:
@@ -164,7 +158,7 @@ exporters:
 
 service:
   # 启用扩展
-  extensions: [health_check, pprof, zpages]
+  extensions: [health_check, zpages]
 
   # Collector 自身可观测性配置
   # telemetry:
@@ -178,15 +172,16 @@ service:
   pipelines:
     logs:
       receivers: [otlp]
-      processors: [memory_limiter, resource, attributes/sanitize, batch/logs]
+      processors: [memory_limiter, batch/logs]
       exporters: [clickhouse/logs]
 
-    metrics:
-      receivers: [otlp]
-      processors: [memory_limiter, resource, batch/metrics]
-      exporters: [clickhouse/metrics]
+    # metrics:
+    #   receivers: [otlp]
+    #   processors: [memory_limiter, resource, batch/metrics]
+    #   # exporters: [clickhouse/metrics]
+    #   exporters: [clickhouse]
 
     traces:
       receivers: [otlp]
-      processors: [memory_limiter, resource, attributes/sanitize, batch/traces]
+      processors: [memory_limiter, batch/traces]
       exporters: [clickhouse/traces]

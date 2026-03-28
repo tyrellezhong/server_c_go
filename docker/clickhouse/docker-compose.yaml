@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   clickhouse:
-    image: clickhouse/clickhouse-server:24.1
+    image: clickhouse/clickhouse-server:25.10
     container_name: clickhouse
     ports:
       - "8123:8123"   # HTTP
@@ -12,6 +12,9 @@ services:
       - ./initdb:/docker-entrypoint-initdb.d
     ulimits:
       nofile: 262144
+    environment:
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=default
     healthcheck:
       test: ["CMD", "clickhouse-client", "--query", "SELECT 1"]
       interval: 5s
@@ -20,7 +23,7 @@ services:
       start_period: 30s
 
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:0.140.0-nightly.5da4529
+    image: otel/opentelemetry-collector-contrib:0.148.0
     container_name: otel-collector
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
@@ -42,7 +45,7 @@ services:
         condition: service_healthy
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:12.3.5
     container_name: grafana
     ports:
       - "3000:3000"   # Web UI

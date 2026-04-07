@@ -1,0 +1,187 @@
+extensions:
+  # 健康检查端点，供 CLB/K8s 探针使用
+  health_check:
+    endpoint: 0.0.0.0:13133
+    path: /health
+  # # pprof 性能分析（生产可按需关闭）
+  # pprof:
+  #   endpoint: 0.0.0.0:1777
+  # zpages 实时调试页面
+  zpages:
+    endpoint: 0.0.0.0:55679
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+        # 最大并发流数量
+        max_concurrent_streams: 100
+        # 单条消息最大 4MB
+        max_recv_msg_size_mib: 4
+      http:
+        endpoint: 0.0.0.0:4318
+        # 单次请求最大 4MB
+        max_request_body_size: 4194304
+        # 跨域支持（按需配置）
+        cors:
+          allowed_origins:
+            - "*"
+          allowed_headers:
+            - "*"
+          max_age: 7200
+
+processors:
+  # 内存限制：防止 OOM，超过 80% 时触发 GC，超过 90% 时拒绝新数据
+  memory_limiter:
+    check_interval: 10s
+    limit_percentage: 80
+    spike_limit_percentage: 10
+
+  # 批处理：减少写入 ClickHouse 的频率，提升吞吐
+  batch/logs:
+    # 最多等待 5s 或凑满 2000 条后发送
+    timeout: 5s
+    send_batch_size: 2000
+    send_batch_max_size: 5000
+
+  batch/metrics:
+    timeout: 10s
+    send_batch_size: 1000
+    send_batch_max_size: 2000
+
+  batch/traces:
+    timeout: 5s
+    send_batch_size: 2000
+    send_batch_max_size: 5000
+
+  # 资源属性处理：统一补充/覆盖环境标识
+  # resource:
+  #   attributes:
+  #     - key: collector.version
+  #       value: "1.0"
+  #       action: upsert
+
+  # 属性过滤：删除敏感或无用字段，降低存储成本
+  # attributes/sanitize:
+  #   actions:
+  #     # 删除可能包含敏感信息的 HTTP 请求头
+  #     - key: http.request.header.authorization
+  #       action: delete
+  #     - key: http.request.header.cookie
+  #       action: delete
+
+  # Tail Sampling（尾部采样）：只保留有价值的 Trace
+  # 生产建议：错误全保留 + 慢请求全保留 + 正常请求按比例采样
+  # tail_sampling:
+  #   # 等待 30s 收集完整 Trace 后再决策
+  #   decision_wait: 30s
+  #   # 内存中最多缓存 50000 条 Trace
+  #   num_traces: 50000
+  #   # 每秒期望采样数
+  #   expected_new_traces_per_sec: 100
+  #   policies:
+  #     # 错误 Trace 全部保留
+  #     - name: keep-errors
+  #       type: status_code
+  #       status_code:
+  #         status_codes: [ERROR]
+  #     # 慢请求（>= 1s）全部保留
+  #     - name: keep-slow-traces
+  #       type: latency
+  #       latency:
+  #         threshold_ms: 1000
+  #     # 正常请求按 10% 概率采样
+  #     - name: sample-normal
+  #       type: probabilistic
+  #       probabilistic:
+  #         sampling_percentage: 10
+
+exporters:
+  
+  clickhouse/logs:
+    endpoint: tcp://clickhouse:9000?enable_json_type=1
+    database: otel
+    logs_table_name: otel_logs_json
+    traces_table_name: otel_traces_json
+    timeout: 10s
+    create_schema: false
+    async_insert: true
+    compress: lz4
+    json: true
+    username: default
+    password: default
+    connection_params:
+      output_format_native_write_json_as_string: "1"
+    # 异步发送队列
+    sending_queue:
+      enabled: true
+      # 队列满时阻塞而非丢弃
+      num_consumers: 4
+      queue_size: 10000
+    # 失败重试策略
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 300s
+
+  clickhouse/traces:
+    endpoint: tcp://clickhouse:9000
+    database: otel
+    traces_table_name: otel_traces
+    timeout: 10s
+    create_schema: false
+    async_insert: true
+    compress: lz4
+    username: default
+    password: default
+    # 异步发送队列
+    sending_queue:
+      enabled: true
+      # 队列满时阻塞而非丢弃
+      num_consumers: 4
+      queue_size: 10000
+    # 失败重试策略
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 300s
+
+  # clickhouse/metrics:
+
+  # Collector 自身指标上报（可对接 Prometheus）
+  # prometheus:
+  #   endpoint: 0.0.0.0:8888
+  #   namespace: otelcol
+
+service:
+  # 启用扩展
+  extensions: [health_check, zpages]
+
+  # Collector 自身可观测性配置
+  # telemetry:
+  #   logs:
+  #     level: warn
+  #     encoding: json
+  #   metrics:
+  #     level: detailed
+  #     address: 0.0.0.0:8888
+
+  pipelines:
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch/logs]
+      exporters: [clickhouse/logs]
+
+    # metrics:
+    #   receivers: [otlp]
+    #   processors: [memory_limiter, resource, batch/metrics]
+    #   # exporters: [clickhouse/metrics]
+    #   exporters: [clickhouse]
+
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch/traces]
+      exporters: [clickhouse/traces]

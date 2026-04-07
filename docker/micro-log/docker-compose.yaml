@@ -44,22 +44,22 @@ services:
       clickhouse:
         condition: service_healthy
 
-  grafana:
-    image: grafana/grafana:12.3.5
-    container_name: grafana
-    ports:
-      - "18000:3000"   # Web UI
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_USERS_ALLOW_SIGN_UP=false
-      - GF_INSTALL_PLUGINS=grafana-clickhouse-datasource
-    volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - grafana_data:/var/lib/grafana
-    depends_on:
-      clickhouse:
-        condition: service_healthy
+#   grafana:
+#     image: grafana/grafana:12.3.5
+#     container_name: grafana
+#     ports:
+#       - "8080:3000"   # Web UI
+#     environment:
+#       - GF_SECURITY_ADMIN_USER=admin
+#       - GF_SECURITY_ADMIN_PASSWORD=admin
+#       - GF_USERS_ALLOW_SIGN_UP=false
+#       - GF_INSTALL_PLUGINS=grafana-clickhouse-datasource
+#     volumes:
+#       - ./grafana/provisioning:/etc/grafana/provisioning
+#       - grafana_data:/var/lib/grafana
+#     depends_on:
+#       clickhouse:
+#         condition: service_healthy
 
-volumes:
-  grafana_data:
+# volumes:
+#   grafana_data:

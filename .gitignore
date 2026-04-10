@@ -2,4 +2,4 @@ build/
 **.log
 .cache
 tmp*
-docker/clickhouse/clickhouse_data
+docker/**/clickhouse_data

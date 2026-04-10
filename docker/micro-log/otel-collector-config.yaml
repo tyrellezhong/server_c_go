@@ -31,6 +31,19 @@ receivers:
             - "*"
           max_age: 7200
 
+  # Alert/Event 专用 receiver，业务直接上报到 4319，无需路由
+  otlp/alerts:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4319
+        max_request_body_size: 4194304
+        cors:
+          allowed_origins:
+            - "*"
+          allowed_headers:
+            - "*"
+          max_age: 7200
+
 processors:
   # 内存限制：防止 OOM，超过 80% 时触发 GC，超过 90% 时拒绝新数据
   memory_limiter:
@@ -40,6 +53,12 @@ processors:
 
   # 批处理：减少写入 ClickHouse 的频率，提升吞吐
   batch/logs:
+    # 最多等待 5s 或凑满 2000 条后发送
+    timeout: 5s
+    send_batch_size: 2000
+    send_batch_max_size: 5000
+  
+  batch/events:
     # 最多等待 5s 或凑满 2000 条后发送
     timeout: 5s
     send_batch_size: 2000
@@ -126,6 +145,30 @@ exporters:
       max_interval: 30s
       max_elapsed_time: 300s
 
+  # Alert 专用 exporter，写入 otel_alerts 表
+  clickhouse/alerts:
+    endpoint: tcp://clickhouse:9000?enable_json_type=1
+    database: otel
+    logs_table_name: otel_alerts
+    timeout: 10s
+    create_schema: false
+    async_insert: true
+    compress: lz4
+    json: true
+    username: default
+    password: default
+    connection_params:
+      output_format_native_write_json_as_string: "1"
+    sending_queue:
+      enabled: true
+      num_consumers: 2
+      queue_size: 2000
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 300s
+
   clickhouse/traces:
     endpoint: tcp://clickhouse:9000
     database: otel
@@ -174,6 +217,12 @@ service:
       receivers: [otlp]
       processors: [memory_limiter, batch/logs]
       exporters: [clickhouse/logs]
+
+    # Alert/Event pipeline：otlp/alerts(4319) 直接写入 otel_alerts 表
+    logs/alerts:
+      receivers: [otlp/alerts]
+      processors: [memory_limiter, batch/events]
+      exporters: [clickhouse/alerts]
 
     # metrics:
     #   receivers: [otlp]

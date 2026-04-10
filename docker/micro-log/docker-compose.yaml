@@ -31,6 +31,7 @@ services:
     ports:
       - "4317:4317"   # OTLP gRPC
       - "4318:4318"   # OTLP HTTP
+      - "4319:4319"   # OTLP HTTP (alerts/events 专用)
       - "8888:8888"   # Prometheus 自监控指标
       - "13133:13133" # 健康检查
       - "55679:55679" # zpages 调试
@@ -44,22 +45,22 @@ services:
       clickhouse:
         condition: service_healthy
 
-#   grafana:
-#     image: grafana/grafana:12.3.5
-#     container_name: grafana
-#     ports:
-#       - "8080:3000"   # Web UI
-#     environment:
-#       - GF_SECURITY_ADMIN_USER=admin
-#       - GF_SECURITY_ADMIN_PASSWORD=admin
-#       - GF_USERS_ALLOW_SIGN_UP=false
-#       - GF_INSTALL_PLUGINS=grafana-clickhouse-datasource
-#     volumes:
-#       - ./grafana/provisioning:/etc/grafana/provisioning
-#       - grafana_data:/var/lib/grafana
-#     depends_on:
-#       clickhouse:
-#         condition: service_healthy
+  grafana:
+    image: grafana/grafana:12.3.5
+    container_name: grafana
+    ports:
+      - "18000:3000"   # Web UI
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-clickhouse-datasource
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      clickhouse:
+        condition: service_healthy
 
-# volumes:
-#   grafana_data:
+volumes:
+  grafana_data:

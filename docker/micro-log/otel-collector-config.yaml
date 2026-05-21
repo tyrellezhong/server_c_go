@@ -122,7 +122,6 @@ exporters:
     endpoint: tcp://clickhouse:9000?enable_json_type=1
     database: otel
     logs_table_name: otel_logs_json
-    traces_table_name: otel_traces_json
     timeout: 10s
     create_schema: false
     async_insert: true

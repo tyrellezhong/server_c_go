@@ -32,4 +32,15 @@ func main() {
 	// zlog.NewCustomZLog()
 	// httpex.UrlEncode()
 	// flagex.PrintFlagArgs()
+	queue := &[]int{1, 2, 3}
+	count := 100
+	for len(*queue) > 0 {
+		log.Println((*queue)[0], "len(queue):", len(*queue))
+		*queue = (*queue)[1:]
+		*queue = append(*queue, count)
+		count++
+		if count > 110 {
+			break
+		}
+	}
 }
